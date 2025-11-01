@@ -112,6 +112,7 @@
       [
         anytype
         boilr
+        (bottles.override { removeWarningPopup = true; })
         caprine
         discord
         emacs-nox
