@@ -49,7 +49,6 @@
   # plain files is through 'home.file'.
   home.file = {
     ".kodi/userdata/addon_data/pvr.hts/instance-settings-1.xml".source = conf/kodi-pvr.hts.xml;
-    ".config/ghostty/config".source = conf/ghostty;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -468,7 +467,13 @@
     # https://discourse.nixos.org/t/home-manager-what-is-the-best-way-to-use-a-long-global-gitignore-file/24986
     ignores = import conf/gitignore_global.nix;
   };
-  programs.ghostty.enableFishIntegration = true;
+  programs.ghostty = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      theme = "Synthwave";
+    };
+  };
   services.syncthing = {
     enable = true;
     tray.enable = true;
