@@ -9,7 +9,9 @@
   inputs,
   ...
 }:
-
+let
+  secretsPath = builtins.toString inputs.nix-secrets;
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -166,6 +168,21 @@
     "flakes"
   ];
 
+  sops = {
+    defaultSopsFile = "${secretsPath}/secrets.yaml";
+    validateSopsFiles = false;
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+    secrets = {
+      "passwords/valou" = {
+        neededForUsers = true;
+      };
+    };
+  };
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -194,9 +211,11 @@
     device = "/dev/disk/by-label/Games";
   };
 
+  users.mutableUsers = false;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.valou = {
-    initialHashedPassword = "$y$j9T$SmCjwti0cZLgFBQxOM2EZ.$uXH4qxEpI6CNluj/TSphPQWs2K6Cn7sXrcGLJK1UAi9";
+    hashedPasswordFile = config.sops.secrets."passwords/valou".path;
     isNormalUser = true;
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
@@ -316,7 +335,15 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    hostKeys = [
+      {
+        path = "/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [

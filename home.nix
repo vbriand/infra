@@ -5,17 +5,22 @@
   lib,
   ...
 }:
-
+let
+  username = "valou";
+  homeDirectory = "/home/${username}";
+  secretsPath = builtins.toString inputs.nix-secrets;
+in
 {
   imports = [
     inputs.plasma-manager.homeModules.plasma-manager
     inputs.zen-browser.homeModules.beta
+    inputs.sops-nix.homeManagerModules.sops
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "valou";
-  home.homeDirectory = "/home/valou";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -79,6 +84,22 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+  };
+
+  sops = {
+    age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
+    defaultSopsFile = "${secretsPath}/secrets.yaml";
+    validateSopsFiles = false;
+    secrets = {
+      "keys/ssh/${username}" = {
+        path = "${homeDirectory}/.ssh/id_ed25519";
+      };
+      "keys/syncthing/hogwarts" = {
+        # No output path needed as services.syncthing.key will copy the file itself
+      };
+      "emails/mozilla" = { };
+      "conf/git/mazarine" = { };
+    };
   };
 
   nixpkgs = {
@@ -351,6 +372,7 @@
         settings = {
           "browser.translations.alwaysTranslateLanguages" = "de,it,es";
           "browser.translations.neverTranslateLanguages" = "fr,en";
+          "services.sync.username" = config.sops.secrets."emails/mozilla";
           "services.sync.engine.workspaces" = true;
           "zen.view.compact.enable-at-startup" = true;
           "zen.welcome-screen.seen" = true;
@@ -460,7 +482,7 @@
     };
     includes = [
       {
-        path = conf/gitconfig_mazarine;
+        path = config.sops.secrets."conf/git/mazarine".path;
         condition = "hasconfig:remote.*.url:git@gitlab.mzrn.net:*/**";
       }
     ];
@@ -476,6 +498,8 @@
   };
   services.syncthing = {
     enable = true;
+    key = config.sops.secrets."keys/syncthing/hogwarts".path;
+    cert = "./cert.pem";
     tray.enable = true;
     settings = {
       devices = {
@@ -526,6 +550,19 @@
         }
       ];
       theme = "dark";
+    };
+  };
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "github" = {
+        host = "github.com";
+        identitiesOnly = true;
+        identityFile = [
+          "~/.ssh/id_ed25519"
+        ];
+      };
     };
   };
 }

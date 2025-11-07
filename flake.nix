@@ -28,6 +28,14 @@
       inputs.home-manager.follows = "home-manager";
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-secrets = {
+      url = "git+ssh://git@github.com/vbriand/nix-secrets?ref=master&shallow=1";
+      flake = false;
+    };
   };
 
   outputs =
@@ -37,6 +45,7 @@
       disko,
       home-manager,
       nixpkgs,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -52,6 +61,7 @@
           modules = [
             ./configuration.nix
             chaotic.nixosModules.default
+            sops-nix.nixosModules.sops
             disko.nixosModules.disko
             {
               disko.devices = {
