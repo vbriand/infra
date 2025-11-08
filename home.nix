@@ -34,6 +34,7 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    better-commits
     nixfmt-rfc-style # Nix formatter
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -54,6 +55,7 @@ in
   # plain files is through 'home.file'.
   home.file = {
     ".kodi/userdata/addon_data/pvr.hts/instance-settings-1.xml".source = conf/kodi-pvr.hts.xml;
+    ".better-commits.json".source = conf/better-commits.json;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -500,6 +502,8 @@ in
     enable = true;
     shellAliases = {
       cat = "bat";
+      ci = "better-commits";
+      br = "better-branch";
     };
   };
   services.syncthing = {
