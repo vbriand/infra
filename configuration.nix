@@ -113,6 +113,7 @@ in
       with pkgs;
       [
         anytype
+        bat
         boilr
         (bottles.override { removeWarningPopup = true; })
         caprine

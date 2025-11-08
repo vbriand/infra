@@ -496,6 +496,12 @@ in
       theme = "Synthwave";
     };
   };
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      cat = "bat";
+    };
+  };
   services.syncthing = {
     enable = true;
     key = config.sops.secrets."keys/syncthing/hogwarts".path;
