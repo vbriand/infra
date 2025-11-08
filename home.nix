@@ -505,6 +505,43 @@ in
       ci = "better-commits";
       br = "better-branch";
     };
+    shellAbbrs = {
+      "-" = "cd -";
+
+      ga = "git add";
+      gb = "git branch";
+      gbs = "git bisect";
+      gbsb = "git bisect bad";
+      gbsg = "git bisect good";
+      gbsl = "git bisect log";
+      gbsr = "git bisect reset";
+      gbss = "git bisect start";
+      gc = "git commit";
+      gca = "git commit --amend";
+      gcane = "git commit --amend --no-edit";
+      gcf = "git commit --fixup";
+      gco = "git checkout";
+      gcp = "git cherry-pick";
+      gcpa = "git cherry-pick --abort";
+      gcpc = "git cherry-pick --continue";
+      gd = "git diff";
+      gf = "git fetch";
+      gfo = "git fetch origin";
+      gl = "git log";
+      gp = "git push";
+      gpl = "git pull";
+      gr = "git rebase";
+      gra = "git rebase --abort";
+      grc = "git rebase --continue";
+      gs = "git status";
+      gsw = "git switch";
+      gwa = "git worktree add";
+      gwl = "git worktree list";
+      gwr = "git worktree remove";
+
+      nhs = "nh home switch -u -b backup";
+      nos = "nh os switch -u";
+    };
   };
   services.syncthing = {
     enable = true;
