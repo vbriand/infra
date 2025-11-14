@@ -218,6 +218,7 @@ in
         );
       in
       {
+        # Options available at about:policies#documentation
         AutofillAddressEnabled = false;
         AutofillCreditCardEnabled = false;
         DisableAppUpdate = true;
