@@ -253,7 +253,7 @@ in
           "{EDB6A15C-5F8C-4531-92FA-98E988CF233C}" = "wanteeed";
           "amptra@keepa.com" = "keepa";
           "twitchnosub@besuper.com" =
-            "https://github.com/besuper/TwitchNoSub/releases/latest/download/TwitchNoSub-firefox.0.9.2.xpi";
+            "https://github.com/besuper/TwitchNoSub/releases/download/0.9.3/TwitchNoSub-firefox-0.9.3.xpi";
         };
         SearchEngines = {
           Add = [
