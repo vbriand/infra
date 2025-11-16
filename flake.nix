@@ -18,10 +18,7 @@
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    millennium = {
-      url = "git+https://github.com/SteamClientHomebrew/Millennium";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    millennium.url = "git+https://github.com/SteamClientHomebrew/Millennium";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
