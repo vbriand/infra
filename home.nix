@@ -387,7 +387,7 @@ in
           settings = {
             "uBlock0@raymondhill.net".settings = {
               advancedUserEnabled = true;
-              hiddenSettings.userResourcesLocation = "https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/f5594de4ef5eadd8d3aa156c24cbc53f17ab606c/video-swap-new/video-swap-new-ublock-origin.js";
+              hiddenSettings.userResourcesLocation = "https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/ed898b750f7e62030afd5561a4305c1832a188da/vaft/vaft-ublock-origin.js";
               user-filters = "twitch.tv##+js(twitch-videoad)";
             };
           };
