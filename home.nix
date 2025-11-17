@@ -253,6 +253,7 @@ in
           "firefox@tampermonkey.net" = "tampermonkey";
           "{EDB6A15C-5F8C-4531-92FA-98E988CF233C}" = "wanteeed";
           "amptra@keepa.com" = "keepa";
+          "addon@protondb-community-extension.com" = "protondb-community-extension";
           "twitchnosub@besuper.com" =
             "https://github.com/besuper/TwitchNoSub/releases/download/0.9.3/TwitchNoSub-firefox-0.9.3.xpi";
         };
