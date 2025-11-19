@@ -36,6 +36,8 @@ in
     "amdgpu.ppfeaturemask=0xffffffff"
   ];
 
+  boot.kernelModules = [ "ntsync" ];
+
   networking.hostName = "hogwarts"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
