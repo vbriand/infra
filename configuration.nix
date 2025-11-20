@@ -158,7 +158,7 @@ in
       after = [ "multi-user.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.lact}/bin/lact daemon";
+        ExecStart = "${lib.getExe pkgs.lact} daemon";
       };
       enable = true;
     };
@@ -233,11 +233,11 @@ in
   programs.bash = {
     # Do not set fish as the login shell to avoid compatibility issues.
     # https://wiki.nixos.org/wiki/Fish#Setting_fish_as_default_shell
-    interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    interactiveShellInit = with pkgs; ''
+      if [[ $(${lib.getExe' procps "ps"} --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        exec ${lib.getExe fish} $LOGIN_OPTION
       fi
     '';
   };
@@ -263,15 +263,15 @@ in
         renice = 10;
       };
       custom = {
-        start = [
-          "${pkgs.ddcutil}/bin/ddcutil -d 1 setvcp 10 90"
-          "${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance"
-          "${pkgs.libnotify}/bin/notify-send 'GameMode started'"
+        start = with pkgs; [
+          "${lib.getExe ddcutil} -d 1 setvcp 10 90"
+          "${lib.getExe power-profiles-daemon} set performance"
+          "${lib.getExe libnotify} 'GameMode started'"
         ];
-        end = [
-          "${pkgs.libnotify}/bin/notify-send 'GameMode ended'"
-          "${pkgs.power-profiles-daemon}/bin/powerprofilesctl set balanced"
-          "${pkgs.ddcutil}/bin/ddcutil -d 1 setvcp 10 44"
+        end = with pkgs; [
+          "${lib.getExe libnotify} 'GameMode ended'"
+          "${lib.getExe power-profiles-daemon} set balanced"
+          "${lib.getExe ddcutil} -d 1 setvcp 10 44"
         ];
       };
     };
