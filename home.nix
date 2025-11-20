@@ -378,6 +378,7 @@ in
           "browser.translations.neverTranslateLanguages" = "fr,en";
           "services.sync.username" = config.sops.secrets."emails/mozilla";
           "services.sync.engine.workspaces" = true;
+          "zen.pinned-tab-manager.restore-pinned-tabs-to-pinned-url" = true;
           "zen.view.compact.enable-at-startup" = true;
           "zen.welcome-screen.seen" = true;
           "zen.workspaces.container-specific-essentials-enabled" = true;
