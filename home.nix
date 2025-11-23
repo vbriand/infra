@@ -409,6 +409,7 @@ in
       valentin = {
         isDefault = true;
         settings = {
+          "browser.download.useDownloadDir" = false;
           "browser.translations.alwaysTranslateLanguages" = "de,it,es";
           "browser.translations.neverTranslateLanguages" = "fr,en";
           "services.sync.username" = config.sops.secrets."emails/mozilla";
