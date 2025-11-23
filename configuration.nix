@@ -149,6 +149,8 @@ in
     variables = {
       GTK_IM_MODULE = "cedilla";
       QT_IM_MODULE = "cedilla";
+      AMD_VULKAN_ICD = "RADV"; # Enforce RADV Vulkan implementation https://docs.mesa3d.org/drivers/radv.html
+      MESA_SHADER_CACHE_MAX_SIZE = "12G";
     };
   };
 
