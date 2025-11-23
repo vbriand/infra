@@ -53,6 +53,11 @@ in
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
+  #
+  # There are also the xdg.configFile and xdg.dataFile shorthands for putting
+  # files in ~/.config and ~/.local/share respectively (make sure to include xdg.enable).
+  # These options are built on top of home.file, but it’s better to use them when possible.
+  # For example, xdg.configFile.”path/from/.config” = {…};
   home.file = {
     ".kodi/userdata/addon_data/pvr.hts/instance-settings-1.xml".source = conf/kodi-pvr.hts.xml;
     ".better-commits.json".source = conf/better-commits.json;
