@@ -281,6 +281,7 @@ in
   programs.gamescope.enable = true;
   # programs.streamcontroller.enable = true;
   programs.dconf.enable = true;
+  programs.kdeconnect.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
