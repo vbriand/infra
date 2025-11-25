@@ -80,9 +80,19 @@ in
           "Groups/0" = {
             Name = "Default";
             "Default Layout" = "us-intl";
-            DefaultIM = "keyboard-us-intl";
+            DefaultIM = "keyboard-fr-ergol";
           };
           "Groups/0/Items/0".Name = "keyboard-us-intl";
+          "Groups/0/Items/1".Name = "keyboard-fr-ergol";
+        };
+        globalOptions = {
+          Behavior = {
+            ActiveByDefault = false;
+          };
+          Hotkey = {
+            EnumerateWithTriggerKeys = true;
+          };
+          "Hotkey/TriggerKeys"."0" = "Control+Alt+space";
         };
       };
     };
