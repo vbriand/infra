@@ -66,6 +66,27 @@ in
     LC_TIME = "fr_FR.UTF-8";
     LC_COLLATE = "fr_FR.UTF-8";
   };
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      # Disable setting the GTK_IM_MODULE & QT_IM_MODULE environment variables to
+      # avoid getting a warning and a potential blinking issue on KDE Plasma.
+      # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
+      waylandFrontend = true;
+      settings = {
+        inputMethod = {
+          GroupOrder."0" = "Default";
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us-intl";
+            DefaultIM = "keyboard-us-intl";
+          };
+          "Groups/0/Items/0".Name = "keyboard-us-intl";
+        };
+      };
+    };
+  };
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -126,6 +147,7 @@ in
         git
         hardinfo2 # System information and benchmarks for Linux systems
         heroic
+        kdePackages.fcitx5-configtool
         kdePackages.kcalc # Calculator
         kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
         kdePackages.sddm-kcm # Configuration module for SDDM
@@ -147,8 +169,6 @@ in
       ]
       ++ [ inputs.ghostty.packages.${system}.default ];
     variables = {
-      GTK_IM_MODULE = "cedilla";
-      QT_IM_MODULE = "cedilla";
       AMD_VULKAN_ICD = "RADV"; # Enforce RADV Vulkan implementation https://docs.mesa3d.org/drivers/radv.html
       MESA_SHADER_CACHE_MAX_SIZE = "12G";
     };
