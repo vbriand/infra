@@ -520,7 +520,7 @@ in
       core = {
         editor = "emacs";
       };
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true; # https://stackoverflow.com/a/17096880/10927329
       rebase.autoSquash = true;
