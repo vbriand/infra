@@ -301,6 +301,14 @@ in
         SearchEngines = {
           Add = [
             {
+              Alias = "@ac";
+              Description = "Search in Are We Anti-Cheat Yet?";
+              IconURL = "https://areweanticheatyet.com/icon.webp";
+              Method = "GET";
+              Name = "Are We Anti-Cheat Yet?";
+              URLTemplate = "https://areweanticheatyet.com/?search={searchTerms}";
+            }
+            {
               Alias = "@enfr";
               Description = "Search in WordReference (EN to FR)";
               IconURL = "https://www.wordreference.com/favicon.ico";
