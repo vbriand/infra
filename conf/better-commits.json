@@ -174,7 +174,7 @@
         "max_length": 72,
         "separator": ""
     },
-    "branch_action_default": "branch",
+    "branch_action_default": "worktree",
     "branch_order": [
         "user",
         "version",
