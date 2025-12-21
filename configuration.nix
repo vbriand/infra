@@ -28,7 +28,7 @@ in
   };
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_cachyos; # pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # pkgs.linuxPackages_latest;
 
   boot.kernelParams = [
     "amdgpu.dcdebugmask=0x10"
@@ -133,6 +133,7 @@ in
     config.allowUnfree = true;
     overlays = [
       inputs.millennium.overlays.default
+      inputs.nix-cachyos-kernel.overlays.default
     ];
   };
 
