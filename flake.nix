@@ -9,7 +9,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -39,7 +38,6 @@
   outputs =
     {
       self,
-      chaotic,
       disko,
       home-manager,
       nixpkgs,
@@ -58,7 +56,6 @@
           specialArgs = { inherit inputs system; };
           modules = [
             ./configuration.nix
-            chaotic.nixosModules.default
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
             {
