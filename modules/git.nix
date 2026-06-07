@@ -1,0 +1,57 @@
+{
+  den.aspects.git = {
+    homeManager = {
+      programs.git.enable = true;
+    };
+
+    provides.valou.homeManager =
+      { config, ... }:
+      {
+        programs.git = {
+          signing = {
+            key = "2708255FFF876F95";
+            signByDefault = true;
+          };
+          settings = {
+            user = {
+              name = "Valentin Briand";
+              email = "678530+vbriand@users.noreply.github.com";
+            };
+            alias = {
+              br = "branch";
+              ci = "commit";
+              co = "checkout";
+              st = "status";
+              # Stash only untracked files
+              su = "!f() { git stash; git stash -u; git stash pop stash@{1}; }; f";
+              # Stash changes not staged for commit and untracked files
+              snsu = "!f() { git stash push --staged; git stash -u; git stash pop stash@{1}; }; f";
+              # Stash changes not staged for commit
+              sns = "!f() { git stash push --staged; git stash; git stash pop stash@{1}; }; f";
+              sw = "switch";
+              wta = "worktree add";
+              wtl = "worktree list";
+              wtr = "worktree remove";
+            };
+            core = {
+              editor = "emacs";
+            };
+            init.defaultBranch = "main";
+            pull.rebase = true;
+            push.autoSetupRemote = true; # https://stackoverflow.com/a/17096880/10927329
+            rebase.autoSquash = true;
+            rebase.autoStash = true;
+          };
+          includes = [
+            {
+              path = config.sops.secrets."conf/git/mazarine".path; # sops template ?
+              condition = "hasconfig:remote.*.url:git@gitlab.mzrn.net:*/**";
+            }
+          ];
+          # https://discourse.nixos.org/t/home-manager-what-is-the-best-way-to-use-a-long-global-gitignore-file/24986
+          ignores = import ../conf/gitignore_global.nix;
+
+        };
+      };
+  };
+}
