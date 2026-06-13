@@ -121,6 +121,7 @@
                 "amptra@keepa.com" = "keepa";
                 "addon@protondb-community-extension.com" = "protondb-community-extension";
                 "nowstreaming@joao.sh" = "nowstreaming-twitch";
+                "addon@karakeep.app" = "karakeep";
                 "twitchnosub@besuper.com" =
                   "https://github.com/besuper/TwitchNoSub/releases/download/0.9.3/TwitchNoSub-firefox-0.9.3.xpi";
               };
