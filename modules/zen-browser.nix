@@ -117,6 +117,7 @@
                 "{188e9a6d-0e71-49ad-b1f2-0b78519512e0}" = "dealabs";
                 "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}" = "violentmonkey";
                 "{EDB6A15C-5F8C-4531-92FA-98E988CF233C}" = "wanteeed";
+                "{6a65273e-2b26-40f5-b66e-8eed317307da}" = "new-tab-suspender";
                 "amptra@keepa.com" = "keepa";
                 "addon@protondb-community-extension.com" = "protondb-community-extension";
                 "nowstreaming@joao.sh" = "nowstreaming-twitch";
