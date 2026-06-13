@@ -115,7 +115,7 @@
                 "{1be309c5-3e4f-4b99-927d-bb500eb4fa88}" = "augmented-steam";
                 "{dbac9680-d559-4cd4-9765-059879e8c467}" = "igraal";
                 "{188e9a6d-0e71-49ad-b1f2-0b78519512e0}" = "dealabs";
-                "firefox@tampermonkey.net" = "tampermonkey";
+                "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}" = "violentmonkey";
                 "{EDB6A15C-5F8C-4531-92FA-98E988CF233C}" = "wanteeed";
                 "amptra@keepa.com" = "keepa";
                 "addon@protondb-community-extension.com" = "protondb-community-extension";
