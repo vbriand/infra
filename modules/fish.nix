@@ -57,16 +57,21 @@
           gf = "git fetch";
           gfo = "git fetch origin";
           gl = "git log";
+          glf = "git log -u"; # lf = filelog. Show the commits history of a file
           gp = "git push";
           gpl = "git pull";
           gr = "git rebase";
           gra = "git rebase --abort";
           grc = "git rebase --continue";
           gs = "git status";
+          gst = "git stash";
+          gsu = "git su";
+          gsnsu = "git snsu";
+          gsns = "git sns";
           gsw = "git switch";
           gwa = "git worktree add";
           gwl = "git worktree list";
-          gwr = "git worktree remove";
+          gwr = "git wtr";
 
           nhs = "nh home switch -u -b backup";
           nos = "nh os switch -u";
