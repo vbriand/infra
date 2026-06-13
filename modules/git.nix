@@ -18,6 +18,8 @@
               email = "678530+vbriand@users.noreply.github.com";
             };
             alias = {
+              # Remove local branches that have been merged to the main branch
+              bclean = "!f() { git branch --merged \${1 - main} | grep -v \" \${1 - main}$\" | xargs -r git branch -d; }; f";
               br = "branch";
               ci = "commit";
               co = "checkout";
@@ -31,7 +33,8 @@
               sw = "switch";
               wta = "worktree add";
               wtl = "worktree list";
-              wtr = "worktree remove";
+              # Remove a worktree and its branch
+              wtr = "!f() { BRANCH=$(git -C \"$1\" branch --show-current 2>/dev/null); git worktree remove \"$1\" && git branch -d \"$BRANCH\"; }; f";
             };
             core = {
               editor = "emacs";
