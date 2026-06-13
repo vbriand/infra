@@ -267,8 +267,9 @@
                 force = true;
                 settings = {
                   "uBlock0@raymondhill.net".settings = {
+                    # https://github.com/gorhill/uBlock/blob/master/src/js/background.js
                     advancedUserEnabled = true;
-                    hiddenSettings.userResourcesLocation = "https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/ed898b750f7e62030afd5561a4305c1832a188da/vaft/vaft-ublock-origin.js";
+                    hiddenSettings.userResourcesLocation = "https://raw.githubusercontent.com/ryanbr/TwitchAdSolutions/6f7f110eb1a8134ae200fcaceeaad999be03d5d8/vaft/vaft-ublock-origin.js";
                     user-filters = "twitch.tv##+js(twitch-videoad)";
                   };
                 };
