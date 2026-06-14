@@ -258,6 +258,7 @@
                 "browser.translations.alwaysTranslateLanguages" = "de,it,es";
                 "browser.translations.neverTranslateLanguages" = "fr,en";
                 "intl.regional_prefs.use_os_locales" = true;
+                "intl.locale.requested" = "en-GB";
                 "services.sync.username" = config.sops.secrets."emails/mozilla";
                 "services.sync.engine.workspaces" = true;
                 "zen.pinned-tab-manager.restore-pinned-tabs-to-pinned-url" = true;
