@@ -67,6 +67,7 @@
       fileSystems."/mnt/games" = {
         device = "/dev/disk/by-label/Games";
         fsType = "btrfs";
+        options = [ "compress=zstd" ];
       };
     };
   };
