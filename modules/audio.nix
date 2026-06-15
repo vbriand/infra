@@ -10,5 +10,11 @@
       # This is especially useful for PipeWire to avoid crackling noises on high system load.
       security.rtkit.enable = true;
     };
+
+    provides.effects = {
+      homeManager = {
+        services.easyeffects.enable = true;
+      };
+    };
   };
 }
