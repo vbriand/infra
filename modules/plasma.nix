@@ -84,5 +84,14 @@
           ];
         };
       };
+
+    provides.to-hosts.homeManager = { osConfig, ... }: {
+      xdg.configFile."kdeconnect/config".text = ''
+        [General]
+        disabled_providers=AsyncLinkProvider
+        keyAlgorithm=EC
+        name=${osConfig.networking.hostName}
+      '';
+    };
   };
 }
