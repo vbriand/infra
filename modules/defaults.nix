@@ -5,10 +5,6 @@
   ...
 }:
 {
-  flake-file.inputs = {
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-  };
-
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -39,7 +35,6 @@
 
   den.default.homeManager.nixpkgs.config.allowUnfree = true;
   den.default.nixos.nixpkgs.config.allowUnfree = true;
-  den.default.nixos.nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.default ];
 
   # Enable HM by default
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];

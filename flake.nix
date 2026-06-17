@@ -4,6 +4,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     den.url = "github:denful/den";
     disko = {
       url = "github:nix-community/disko/latest";
@@ -24,7 +25,6 @@
     };
     import-tree.url = "github:vic/import-tree";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nix-secrets = {
       url = "git+ssh://git@github.com/vbriand/nix-secrets?ref=master&shallow=1";
       flake = false;

@@ -1,5 +1,9 @@
-{ den, ... }:
+{ den, inputs, ... }:
 {
+  flake-file.inputs = {
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+  };
+
   # host aspect
   den.aspects.hogwarts = {
     includes = [
@@ -27,6 +31,7 @@
       {
         imports = [
           (modulesPath + "/installer/scan/not-detected.nix")
+          inputs.chaotic.nixosModules.default
         ];
 
         boot.loader = {
@@ -42,7 +47,7 @@
           "usb_storage"
           "sd_mod"
         ];
-        boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # pkgs.linuxPackages_latest;
+        boot.kernelPackages = pkgs.linuxPackages_cachyos;
         boot.initrd.kernelModules = [ ];
         boot.kernelModules = [ "ntsync" ];
         boot.extraModulePackages = [ ];
