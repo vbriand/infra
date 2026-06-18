@@ -11,6 +11,7 @@
       den.aspects.filesystem
       den.aspects.fish
       den.aspects.flatpak
+      den.aspects.gaming
       den.aspects.gpg
       den.aspects.nh
       den.aspects.plasma
@@ -49,7 +50,6 @@
         ];
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
         boot.initrd.kernelModules = [ ];
-        boot.kernelModules = [ "ntsync" ];
         boot.extraModulePackages = [ ];
         boot.kernelParams = [
           "amdgpu.dcdebugmask=0x10"
@@ -71,7 +71,6 @@
           systemPackages = with pkgs; [
             anytype
             bat
-            boilr
             (bottles.override { removeWarningPopup = true; })
             caprine
             discord
@@ -81,15 +80,11 @@
             ghostty
             git
             hardinfo2 # System information and benchmarks for Linux systems
-            heroic
             lact # GPU metrics and overclocking
             obsidian
             piper # Mouse configuration GUI
-            protonplus
-            samrewritten
             snapper
             snapper-gui
-            steamtinkerlaunch
             tealdeer
             teamspeak6-client
             wayland-utils # Wayland utilities
