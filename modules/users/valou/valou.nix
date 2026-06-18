@@ -69,7 +69,7 @@
         programs.steam.config = {
           enable = true;
           closeSteam = true;
-          defaultCompatTool = "GE-Proton";
+          defaultCompatTool = "Proton-GE";
           apps = {
             bit-trip-runner = {
               id = 63710;
@@ -77,7 +77,7 @@
             };
             borderlands-goty = {
               id = 8980;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
               launchOptionsStr = ''WINEDLLOVERRIDES="dsound=n,b" %command% -nostartupmovies -nosplash'';
             };
             counter-strike2 = {
@@ -86,16 +86,16 @@
             };
             fallout-76 = {
               id = 1151340;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
               launchOptionsStr = "gamescope -w 3440 -h 1440 -f --force-grab-cursor -- %command%";
             };
             half-life-legacy = {
               id = 3619040;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
             };
             monster-hunter-world = {
               id = 582010;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
               launchOptions = {
                 wrappers = [
                   # (lib.getExe pkgs.gamemode)
@@ -105,7 +105,7 @@
             };
             red-dead-redemption2 = {
               id = 1174180;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
             };
             slay-the-spire = {
               id = 646570;
@@ -114,7 +114,7 @@
             };
             super-meat-boy = {
               id = 40800;
-              compatTool = "GE-Proton";
+              compatTool = "Proton-GE";
               launchOptions = {
                 args = [
                   "-fullscreen"
@@ -139,7 +139,7 @@
             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
             dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
             localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-            extraCompatPackages = with pkgs; [ proton-ge-bin ];
+            extraCompatPackages = with pkgs; [ proton-ge-custom ];
           };
           gamemode = {
             enable = true;
