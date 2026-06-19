@@ -12,6 +12,7 @@
       den.aspects.fish
       den.aspects.flatpak
       den.aspects.gaming
+      den.aspects.ghostty
       den.aspects.gpg
       den.aspects.nh
       den.aspects.plasma
@@ -77,7 +78,6 @@
             emacs-nox
             fishPlugins.done
             fishPlugins.tide
-            ghostty
             git
             hardinfo2 # System information and benchmarks for Linux systems
             lact # GPU metrics and overclocking
