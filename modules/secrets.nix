@@ -68,7 +68,7 @@ in
                 # No output path needed as services.syncthing.key will copy the file itself
               };
               "emails/mozilla" = { };
-              "conf/git/mazarine" = { };
+              "emails/mazarine" = { };
             };
           };
       };

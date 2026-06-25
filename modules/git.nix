@@ -7,6 +7,11 @@
     provides.valou.homeManager =
       { config, ... }:
       {
+        sops.templates."git-mazarine".content = ''
+          [user]
+            email = ${config.sops.placeholder."emails/mazarine"}
+        '';
+
         programs.git = {
           signing = {
             key = "2708255FFF876F95";
@@ -47,13 +52,12 @@
           };
           includes = [
             {
-              path = config.sops.secrets."conf/git/mazarine".path; # sops template ?
+              path = config.sops.templates."git-mazarine".path;
               condition = "hasconfig:remote.*.url:git@gitlab.mzrn.net:*/**";
             }
           ];
           # https://discourse.nixos.org/t/home-manager-what-is-the-best-way-to-use-a-long-global-gitignore-file/24986
           ignores = import ../conf/gitignore_global.nix;
-
         };
       };
   };
