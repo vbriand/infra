@@ -11,6 +11,7 @@
       den.batteries.primary-user
       den.aspects.audio.effects
       den.aspects.better-commits
+      den.aspects.emacs
       den.aspects.fish
       den.aspects.gaming
       den.aspects.ghostty

@@ -8,6 +8,7 @@
   den.aspects.hogwarts = {
     includes = [
       den.aspects.audio
+      den.aspects.emacs
       den.aspects.filesystem
       den.aspects.fish
       den.aspects.flatpak
@@ -75,7 +76,6 @@
             (bottles.override { removeWarningPopup = true; })
             caprine
             discord
-            emacs-nox
             fishPlugins.done
             fishPlugins.tide
             git
