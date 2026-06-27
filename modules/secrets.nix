@@ -67,6 +67,7 @@ in
               "keys/syncthing/hogwarts" = {
                 # No output path needed as services.syncthing.key will copy the file itself
               };
+              "keys/api/sgdb" = { };
               "emails/mozilla" = { };
               "emails/mazarine" = { };
             };
