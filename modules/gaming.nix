@@ -200,6 +200,66 @@
         '';
         path = "${config.xdg.configHome}/boilr/config.toml";
       };
+
+      sops.templates."steam-easygrid/config.json" = {
+        content = ''
+          {
+              "api_key": "${config.sops.placeholder."keys/api/sgdb"}",
+              "display_name_fallback": true,
+              "replace_custom_images": true,
+              "appids_excluded_from_replacement": [],
+              "prioritize_animated":  false,
+              "expand_headers": "",
+              "app_page_button": true,
+              "grids_config": {
+                  "nsfw": "false",
+                  "humor": "any",
+                  "epilepsy": "any",
+                  "types": "static,animated",
+                  "mimes": "image/webp,image/png,image/jpeg",
+                  "styles": "alternate,blurred,white_logo,material,no_logo",
+                  "dimensions": "600x900,342x482,660x930,512x512,1024x1024"
+              },
+              "wide_grids_config": {
+                  "nsfw": "false",
+                  "humor": "any",
+                  "epilepsy": "any",
+                  "types": "static,animated",
+                  "mimes": "image/webp,image/png,image/jpeg",
+                  "styles": "alternate,blurred,white_logo,material,no_logo",
+                  "dimensions": "460x215,920x430,512x512,1024x1024"
+              },
+              "heroes_config": {
+                  "nsfw": "false",
+                  "humor": "any",
+                  "epilepsy": "any",
+                  "types": "static,animated",
+                  "mimes": "image/webp,image/png,image/jpeg",
+                  "styles": "alternate,blurred,material"
+              },
+              "logos_config": {
+                  "nsfw": "false",
+                  "humor": "any",
+                  "epilepsy": "any",
+                  "types": "static,animated",
+                  "mimes": "image/webp,image/png",
+                  "styles": "official,white,black,custom"
+              },
+              "icons_config": {
+                  "nsfw": "false",
+                  "humor": "any",
+                  "epilepsy": "any",
+                  "types": "static,animated",
+                  "mimes": "image/png,image/vnd.microsoft.icon",
+                  "styles": "official,custom"
+              },
+              "grids_width_mult": 5,
+              "heroes_width_mult": 10,
+              "logos_width_mult": 7
+          }
+        '';
+        path = "${config.xdg.dataHome}/millennium/plugins/steam-easygrid/config.json";
+      };
     };
   };
 }
