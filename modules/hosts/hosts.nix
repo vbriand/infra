@@ -6,7 +6,6 @@
     roles = [ "gaming" ];
     users = {
       valou = {
-        classes = [ ];
         roles = [ "gaming" ];
       };
     };

@@ -36,9 +36,6 @@
   den.default.homeManager.nixpkgs.config.allowUnfree = true;
   den.default.nixos.nixpkgs.config.allowUnfree = true;
 
-  # Enable HM by default
-  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
-
   den.default.includes = [ den.batteries.hostname ];
 
   den.default.nixos.networking.networkmanager.enable = true;
