@@ -12,7 +12,7 @@
       den.aspects.filesystem
       den.aspects.fish
       den.aspects.flatpak
-      den.aspects.gaming
+      den.aspects.gaming.communication
       den.aspects.ghostty
       den.aspects.gpg
       den.aspects.nh
@@ -75,7 +75,6 @@
             bat
             (bottles.override { removeWarningPopup = true; })
             caprine
-            discord
             fishPlugins.done
             fishPlugins.tide
             git
@@ -86,7 +85,6 @@
             snapper
             snapper-gui
             tealdeer
-            teamspeak6-client
             wayland-utils # Wayland utilities
             wget
             wl-clipboard # Command-line copy/paste utilities for Wayland
