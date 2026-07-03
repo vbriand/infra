@@ -1,13 +1,10 @@
 { den, inputs, ... }:
 {
-  flake-file.inputs = {
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-  };
-
   # host aspect
   den.aspects.hogwarts = {
     includes = with den.aspects; [
       audio
+      bootable
       emacs
       fish
       flatpak
@@ -30,29 +27,14 @@
         ...
       }:
       {
-        imports = [ inputs.chaotic.nixosModules.default ];
-
-        boot.loader = {
-          efi.canTouchEfiVariables = true;
-          systemd-boot.enable = true;
-          systemd-boot.configurationLimit = 15; # Maximum number of boot entries
-        };
-        boot.kernelPackages = pkgs.linuxPackages_cachyos;
         boot.kernelParams = [
           "amdgpu.dcdebugmask=0x10"
           # Enable overclocking https://github.com/ilya-zlobintsev/LACT/wiki/Overclocking-(AMD)
           "amdgpu.ppfeaturemask=0xffffffff"
         ];
 
-        # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-        # (the default) this is the recommended approach. When using systemd-networkd it's
-        # still possible to use this option, but it's recommended to use it in conjunction
-        # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-        networking.useDHCP = lib.mkDefault true;
-
         hardware.xone.enable = true;
         hardware.i2c.enable = true; # Allow changing the monitor's brightness
-        hardware.facter.reportPath = ./facter.json;
 
         environment = {
           systemPackages = with pkgs; [
@@ -77,8 +59,6 @@
             MESA_SHADER_CACHE_MAX_SIZE = "12G";
           };
         };
-
-        networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
         i18n.inputMethod = {
           enable = true;
