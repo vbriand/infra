@@ -26,32 +26,18 @@
       {
         config,
         lib,
-        modulesPath,
         pkgs,
         ...
       }:
       {
-        imports = [
-          (modulesPath + "/installer/scan/not-detected.nix")
-          inputs.chaotic.nixosModules.default
-        ];
+        imports = [ inputs.chaotic.nixosModules.default ];
 
         boot.loader = {
           efi.canTouchEfiVariables = true;
           systemd-boot.enable = true;
           systemd-boot.configurationLimit = 15; # Maximum number of boot entries
         };
-        boot.initrd.availableKernelModules = [
-          "nvme"
-          "xhci_pci"
-          "ahci"
-          "usbhid"
-          "usb_storage"
-          "sd_mod"
-        ];
         boot.kernelPackages = pkgs.linuxPackages_cachyos;
-        boot.initrd.kernelModules = [ ];
-        boot.extraModulePackages = [ ];
         boot.kernelParams = [
           "amdgpu.dcdebugmask=0x10"
           # Enable overclocking https://github.com/ilya-zlobintsev/LACT/wiki/Overclocking-(AMD)
@@ -64,9 +50,9 @@
         # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
         networking.useDHCP = lib.mkDefault true;
 
-        hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
         hardware.xone.enable = true;
         hardware.i2c.enable = true; # Allow changing the monitor's brightness
+        hardware.facter.reportPath = ./facter.json;
 
         environment = {
           systemPackages = with pkgs; [
