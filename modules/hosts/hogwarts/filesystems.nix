@@ -7,7 +7,7 @@
     };
   };
 
-  den.aspects.filesystem = {
+  den.aspects.hogwarts = {
     nixos = {
       imports = [ inputs.disko.nixosModules.disko ];
 

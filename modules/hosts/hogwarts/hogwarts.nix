@@ -6,20 +6,19 @@
 
   # host aspect
   den.aspects.hogwarts = {
-    includes = [
-      den.aspects.audio
-      den.aspects.emacs
-      den.aspects.filesystem
-      den.aspects.fish
-      den.aspects.flatpak
-      den.aspects.gaming.communication
-      den.aspects.ghostty
-      den.aspects.gpg
-      den.aspects.nh
-      den.aspects.plasma
-      den.aspects.secrets
-      den.aspects.ssh
-      den.aspects.syncthing
+    includes = with den.aspects; [
+      audio
+      emacs
+      fish
+      flatpak
+      gaming.communication
+      ghostty
+      gpg
+      nh
+      plasma
+      secrets
+      ssh
+      syncthing
     ];
 
     # host NixOS configuration
