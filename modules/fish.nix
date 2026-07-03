@@ -21,6 +21,13 @@
             set fish_greeting # Disable greeting
           '';
         };
+
+        environment = {
+          systemPackages = with pkgs; [
+            fishPlugins.done
+            fishPlugins.tide
+          ];
+        };
       };
 
     homeManager = {

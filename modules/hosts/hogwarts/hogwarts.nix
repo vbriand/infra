@@ -60,8 +60,6 @@
             bat
             (bottles.override { removeWarningPopup = true; })
             caprine
-            fishPlugins.done
-            fishPlugins.tide
             git
             hardinfo2 # System information and benchmarks for Linux systems
             lact # GPU metrics and overclocking
