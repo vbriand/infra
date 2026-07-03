@@ -65,7 +65,7 @@
       };
 
       fileSystems."/mnt/games" = {
-        device = "/dev/disk/by-label/Games";
+        device = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_4000GB_224519803434-part2";
         fsType = "btrfs";
         options = [ "compress=zstd" ];
       };
