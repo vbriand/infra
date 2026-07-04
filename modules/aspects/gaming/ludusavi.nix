@@ -1,10 +1,15 @@
+{ den, ... }:
 {
-  den.aspects.ludusavi = {
+  den.aspects.ludusavi.base = {
     homeManager = {
       services.ludusavi.enable = true;
     };
+  };
 
-    provides.valou.homeManager = { config, ... }: {
+  den.aspects.ludusavi.daily-backup = {
+    includes = [ den.aspects.ludusavi.base ];
+
+    homeManager = { config, ... }: {
       services.ludusavi = {
         backupNotification = true;
         frequency = "*-*-* 22:00:00";

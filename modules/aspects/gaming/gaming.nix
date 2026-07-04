@@ -2,7 +2,6 @@
 {
   den.aspects.gaming = {
     includes = [
-      den.aspects.ludusavi
       den.aspects.steam
     ];
 

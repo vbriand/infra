@@ -1,8 +1,6 @@
 {
   den.aspects.boilr = {
     nixos = { pkgs, ... }: {
-      boot.kernelModules = [ "ntsync" ];
-
       environment = {
         systemPackages = with pkgs; [
           boilr

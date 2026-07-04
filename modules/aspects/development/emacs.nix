@@ -1,12 +1,6 @@
 {
   den.aspects.emacs = {
-    nixos = { pkgs, ... }: {
-      environment = {
-        systemPackages = [ pkgs.emacs-nox ];
-      };
-    };
-
-    provides.valou.homeManager = { pkgs, ... }: {
+    homeManager = { pkgs, ... }: {
       programs.emacs = {
         enable = true;
         extraConfig = ''

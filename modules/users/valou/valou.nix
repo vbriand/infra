@@ -9,19 +9,13 @@
     includes = [
       den.batteries.define-user
       den.batteries.primary-user
-      den.aspects.audio.effects
-      den.aspects.better-commits
-      den.aspects.emacs
       den.aspects.fish
       den.aspects.gaming
       den.aspects.ghostty
-      den.aspects.git
       den.aspects.nh
       den.aspects.kodi
-      den.aspects.plasma
       den.aspects.secrets
       den.aspects.syncthing
-      den.aspects.vscode
       den.aspects.zen-browser
     ];
 
@@ -56,11 +50,19 @@
         ];
       };
 
-    provides.hogwarts.nixos = {
-      programs = {
-        firefox.enable = true;
-        thunderbird.enable = true;
+    provides.hogwarts = {
+      nixos = {
+        programs = {
+          firefox.enable = true;
+          thunderbird.enable = true;
+        };
       };
+      includes = with den.aspects; [
+        audio.effects
+        dev-tools.valou
+        ludusavi.daily-backup
+        plasma
+      ];
     };
 
     # user can provide NixOS configurations

@@ -3,7 +3,6 @@
   # host aspect
   den.aspects.hogwarts = {
     includes = with den.aspects; [
-      audio
       bootable
       emacs
       fish
