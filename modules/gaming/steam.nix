@@ -65,7 +65,7 @@
 
       programs.steam.config = {
         enable = true;
-        closeSteam = true;
+        onSteamRunning = "close";
         defaultCompatTool = "Proton-GE";
         apps = {
           bit-trip-runner = {
