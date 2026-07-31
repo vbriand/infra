@@ -27,7 +27,9 @@
       }:
       {
         boot.kernelParams = [
-          "amdgpu.dcdebugmask=0x10"
+          # Disable Panel self refresh and memory stutter mode to hopefully prevent micro stutters
+          # https://wiki.archlinux.org/title/AMDGPU#Frozen_or_unresponsive_display_(flip_done_timed_out)
+          "amdgpu.dcdebugmask=0x12"
           # Enable overclocking https://github.com/ilya-zlobintsev/LACT/wiki/Overclocking-(AMD)
           "amdgpu.ppfeaturemask=0xffffffff"
         ];
