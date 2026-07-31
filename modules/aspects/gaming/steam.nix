@@ -63,6 +63,9 @@
         inputs.steam-config-nix.homeModules.default
       ];
 
+      # To find the internal name of a compatibility tool, one might manually
+      # select it in the game's options, then open ~/.local/share/Steam/config/config.vdf
+      # and search for the game's id in the "CompatToolMapping" object.
       programs.steam.config = {
         enable = true;
         onSteamRunning = "close";
@@ -74,7 +77,6 @@
           };
           borderlands-goty = {
             id = 8980;
-            compatTool = "Proton-GE";
             launchOptionsStr = ''WINEDLLOVERRIDES="dsound=n,b" %command% -nostartupmovies -nosplash'';
           };
           counter-strike2 = {
@@ -83,16 +85,10 @@
           };
           fallout-76 = {
             id = 1151340;
-            compatTool = "Proton-GE";
             launchOptionsStr = "gamescope -w 3440 -h 1440 -f --force-grab-cursor -- %command%";
-          };
-          half-life-legacy = {
-            id = 3619040;
-            compatTool = "Proton-GE";
           };
           monster-hunter-world = {
             id = 582010;
-            compatTool = "Proton-GE";
             launchOptions = {
               wrappers = [
                 # (lib.getExe pkgs.gamemode)
@@ -100,18 +96,14 @@
               ];
             };
           };
-          red-dead-redemption2 = {
-            id = 1174180;
-            compatTool = "Proton-GE";
-          };
           slay-the-spire = {
             id = 646570;
-            compatTool = "proton_experimental";
+            compatTool = "steamlinuxruntime";
             launchOptionsStr = ''LD_PRELOAD="" gamescope -f -w 1920 -h 1080 -W 3440 -H 1440 -r 165 -- env LD_PRELOAD="$LD_PRELOAD" %command%'';
           };
           super-meat-boy = {
             id = 40800;
-            compatTool = "Proton-GE";
+            compatTool = "Proton-GE"; # Native Linux version is selected by default but is obsolete (2010 version), thus Proton needs to be forced
             launchOptions = {
               args = [
                 "-fullscreen"
