@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   flake-file.inputs = {
     zen-browser = {
@@ -93,126 +93,6 @@
                 "twitchnosub@besuper.com" =
                   "https://github.com/besuper/TwitchNoSub/releases/download/0.9.3/TwitchNoSub-firefox-0.9.3.xpi";
               };
-              SearchEngines = {
-                Add = [
-                  {
-                    Alias = "@ac";
-                    Description = "Search in Are We Anti-Cheat Yet?";
-                    IconURL = "https://areweanticheatyet.com/icon.webp";
-                    Method = "GET";
-                    Name = "Are We Anti-Cheat Yet?";
-                    URLTemplate = "https://areweanticheatyet.com/?search={searchTerms}";
-                  }
-                  {
-                    Alias = "@enfr";
-                    Description = "Search in WordReference (EN to FR)";
-                    IconURL = "https://www.wordreference.com/favicon.ico";
-                    Method = "GET";
-                    Name = "WordReference (EN to FR)";
-                    URLTemplate = "https://www.wordreference.com/redirect/translation.aspx?w={searchTerms}&dict=enfr";
-                  }
-                  {
-                    Alias = "@fren";
-                    Description = "Search in WordReference (FR to EN)";
-                    IconURL = "https://www.wordreference.com/favicon.ico";
-                    Method = "GET";
-                    Name = "WordReference (FR to EN)";
-                    URLTemplate = "https://www.wordreference.com/redirect/translation.aspx?w={searchTerms}&dict=fren";
-                  }
-                  {
-                    Alias = "@hltb";
-                    Description = "Search in How Long To Beat";
-                    IconURL = "https://howlongtobeat.com/img/icons/favicon-96x96.png";
-                    Method = "GET";
-                    Name = "How Long To Beat";
-                    URLTemplate = "https://howlongtobeat.com/?q={searchTerms}";
-                  }
-                  {
-                    Alias = "@hm";
-                    Description = "Search in Home Manager options";
-                    IconURL = "https://mynixos.com/favicon-32x32.png";
-                    Method = "GET";
-                    Name = "Home Manager";
-                    URLTemplate = "https://mynixos.com/search?q=home-manager+{searchTerms}";
-                  }
-                  {
-                    Alias = "@np";
-                    Description = "Search in NixOS packages";
-                    IconURL = "https://nixos.org/favicon.ico";
-                    Method = "GET";
-                    Name = "NixOS packages";
-                    URLTemplate = "https://search.nixos.org/packages?channel=unstable&from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
-                  }
-                  {
-                    Alias = "@no";
-                    Description = "Search in NixOS options";
-                    IconURL = "https://nixos.org/favicon.ico";
-                    Method = "GET";
-                    Name = "NixOS options";
-                    URLTemplate = "https://search.nixos.org/options?channel=unstable&from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
-                  }
-                  {
-                    Alias = "@nw";
-                    Description = "Search in NixOS wiki";
-                    IconURL = "https://nixos.org/favicon.ico";
-                    Method = "GET";
-                    Name = "NixOS wiki";
-                    URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}&title=Special%3ASearch&wprov=acrw1_-1";
-                  }
-                  {
-                    Alias = "@pc";
-                    Description = "Search in PCGamingWiki";
-                    IconURL = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
-                    Method = "GET";
-                    Name = "PCGamingWiki";
-                    URLTemplate = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}&title=Special%3ASearch";
-                  }
-                  {
-                    Alias = "@pdb";
-                    Description = "Search in ProtonDB";
-                    IconURL = "https://www.protondb.com/sites/protondb/images/site-logo.svg";
-                    Method = "GET";
-                    Name = "ProtonDB";
-                    URLTemplate = "https://www.protondb.com/search?q={searchTerms}";
-                  }
-                  {
-                    Alias = "@uhs";
-                    Description = "Search in Universal Hint System";
-                    IconURL = "https://static.uhs-hints.com/images/crystal-ball-transparent-16.png";
-                    Method = "GET";
-                    Name = "Universal Hint System";
-                    URLTemplate = "https://www.uhs-hints.com/hints/search.php?search={searchTerms}";
-                  }
-                  {
-                    Alias = "@w";
-                    Description = "Search in Wikipedia (EN)";
-                    IconURL = "https://wikipedia.org/static/favicon/wikipedia.ico";
-                    Method = "GET";
-                    Name = "Wikipedia EN";
-                    URLTemplate = "https://www.wikipedia.org/search-redirect.php?family=wikipedia&search={searchTerms}&language=en&go=Go";
-                  }
-                  {
-                    Alias = "@wfr";
-                    Description = "Search in Wikipedia (FR)";
-                    IconURL = "https://wikipedia.org/static/favicon/wikipedia.ico";
-                    Method = "GET";
-                    Name = "Wikipedia FR";
-                    URLTemplate = "https://www.wikipedia.org/search-redirect.php?family=wikipedia&search={searchTerms}&language=fr&go=Go";
-                  }
-                  {
-                    Alias = "@yt";
-                    Description = "Search in Youtube";
-                    IconURL = "https://www.youtube.com/s/desktop/33ae93e9/img/logos/favicon.ico";
-                    Method = "GET";
-                    Name = "Youtube";
-                    URLTemplate = "https://www.youtube.com/results?search_query={searchTerms}";
-                  }
-                ];
-                Remove = [
-                  "Bing"
-                  "Wikipedia (en)"
-                ];
-              };
             };
           profiles = {
             valentin = {
@@ -257,6 +137,173 @@
                   id = 2;
                 };
               };
+              search =
+                let
+                  hideDefaultSearchEngines =
+                    searchEngines:
+                    lib.genAttrs searchEngines (id: {
+                      inherit id;
+                      metaData = {
+                        hidden = true;
+                      };
+                    });
+                in
+                {
+                  # https://gist.github.com/Tblue/62ff47bef7f894e92ed5
+                  # nix-shell -p 'python314.withPackages (ps: with ps; [ lz4 ])' --run 'python3 mozlz4a.py -d search.json.mozlz4 search.json'
+                  force = true;
+                  default = "google";
+                  engines = {
+                    areweanticheatyet = {
+                      name = "Are We Anti-Cheat Yet?";
+                      icon = "https://areweanticheatyet.com/icon.webp";
+                      definedAliases = [ "@ac" ];
+                      urls = [
+                        {
+                          template = "https://areweanticheatyet.com/?search={searchTerms}";
+                        }
+                      ];
+                    };
+                    wordreference-enfr = {
+                      name = "WordReference (EN to FR)";
+                      icon = "https://www.wordreference.com/favicon.ico";
+                      definedAliases = [ "@enfr" ];
+                      urls = [
+                        {
+                          template = "https://www.wordreference.com/redirect/translation.aspx?w={searchTerms}&dict=enfr";
+                        }
+                      ];
+                    };
+                    wordreference-fren = {
+                      name = "WordReference (FR to EN)";
+                      icon = "https://www.wordreference.com/favicon.ico";
+                      definedAliases = [ "@fren" ];
+                      urls = [
+                        {
+                          template = "https://www.wordreference.com/redirect/translation.aspx?w={searchTerms}&dict=fren";
+                        }
+                      ];
+                    };
+                    howlongtobeat = {
+                      name = "How Long To Beat";
+                      icon = "https://howlongtobeat.com/img/icons/favicon-96x96.png";
+                      definedAliases = [ "@hltb" ];
+                      urls = [
+                        {
+                          template = "https://howlongtobeat.com/?q={searchTerms}";
+                        }
+                      ];
+                    };
+                    home-manager = {
+                      name = "Home Manager";
+                      icon = "https://mynixos.com/favicon-32x32.png";
+                      definedAliases = [ "@hm" ];
+                      urls = [
+                        {
+                          template = "https://mynixos.com/search?q=home-manager+{searchTerms}";
+                        }
+                      ];
+                    };
+                    nixos-packages = {
+                      name = "NixOS packages";
+                      icon = "https://nixos.org/favicon.ico";
+                      definedAliases = [ "@np" ];
+                      urls = [
+                        {
+                          template = "https://search.nixos.org/packages?channel=unstable&from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+                        }
+                      ];
+                    };
+                    nixos-options = {
+                      name = "NixOS options";
+                      icon = "https://nixos.org/favicon.ico";
+                      definedAliases = [ "@no" ];
+                      urls = [
+                        {
+                          template = "https://search.nixos.org/options?channel=unstable&from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+                        }
+                      ];
+                    };
+                    nixos-wiki = {
+                      name = "NixOS wiki";
+                      icon = "https://nixos.org/favicon.ico";
+                      definedAliases = [ "@nw" ];
+                      urls = [
+                        {
+                          template = "https://wiki.nixos.org/w/index.php?search={searchTerms}&title=Special%3ASearch&wprov=acrw1_-1";
+                        }
+                      ];
+                    };
+                    pcgamingwiki = {
+                      name = "PCGamingWiki";
+                      icon = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
+                      definedAliases = [ "@pc" ];
+                      urls = [
+                        {
+                          template = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}&title=Special%3ASearch";
+                        }
+                      ];
+                    };
+                    protondb = {
+                      name = "ProtonDB";
+                      icon = "https://www.protondb.com/sites/protondb/images/site-logo.svg";
+                      definedAliases = [ "@pdb" ];
+                      urls = [
+                        {
+                          template = "https://www.protondb.com/search?q={searchTerms}";
+                        }
+                      ];
+                    };
+                    universal-hint-system = {
+                      name = "Universal Hint System";
+                      icon = "https://static.uhs-hints.com/images/crystal-ball-transparent-16.png";
+                      definedAliases = [ "@uhs" ];
+                      urls = [
+                        {
+                          template = "https://www.uhs-hints.com/hints/search.php?search={searchTerms}";
+                        }
+                      ];
+                    };
+                    wikipedia-en = {
+                      name = "Wikipedia EN";
+                      icon = "https://wikipedia.org/static/favicon/wikipedia.ico";
+                      definedAliases = [ "@w" ];
+                      urls = [
+                        {
+                          template = "https://www.wikipedia.org/search-redirect.php?family=wikipedia&search={searchTerms}&language=en&go=Go";
+                        }
+                      ];
+                    };
+                    wikipedia-fr = {
+                      name = "Wikipedia FR";
+                      icon = "https://wikipedia.org/static/favicon/wikipedia.ico";
+                      definedAliases = [ "@wfr" ];
+                      urls = [
+                        {
+                          template = "https://www.wikipedia.org/search-redirect.php?family=wikipedia&search={searchTerms}&language=fr&go=Go";
+                        }
+                      ];
+                    };
+                    youtube = {
+                      name = "Youtube";
+                      icon = "https://www.youtube.com/s/desktop/33ae93e9/img/logos/favicon.ico";
+                      definedAliases = [ "@yt" ];
+                      urls = [
+                        {
+                          template = "https://www.youtube.com/results?search_query={searchTerms}";
+                        }
+                      ];
+                    };
+                  }
+                  // hideDefaultSearchEngines [
+                    "bing"
+                    "ddg"
+                    "ebay-uk"
+                    "perplexity"
+                    "qwant"
+                    "wikipedia"
+                  ];
+                };
             };
           };
         };
