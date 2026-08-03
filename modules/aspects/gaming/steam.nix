@@ -71,6 +71,18 @@
         onSteamRunning = "close";
         defaultCompatTool = "Proton-GE";
         apps = {
+          alan-wake = {
+            id = 108710;
+            files.install = {
+              # Disable motion blur
+              "shaders/build/pc".source = ./assets/alan-wake;
+            };
+            removeFiles.install = [
+              # Remove startup videos
+              "data/videos/startup_mgs.bik"
+              "data/videos/startup_remedy.bik"
+            ];
+          };
           bit-trip-runner = {
             id = 63710;
             compatTool = "proton_experimental";
