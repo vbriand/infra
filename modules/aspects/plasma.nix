@@ -47,7 +47,9 @@
 
       programs.plasma = {
         enable = true;
+        overrideConfig = true;
         workspace = {
+          colorScheme = "BreezeDark";
           wallpaper = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/SafeLanding/contents/images/5120x2880.jpg";
         };
         panels = [
