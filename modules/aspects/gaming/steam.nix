@@ -71,57 +71,55 @@
         onSteamRunning = "close";
         defaultCompatTool = "Proton-GE";
         apps = {
-          alan-wake = {
+          "Alan Wake" = {
             id = 108710;
-            files.install = {
-              # Disable motion blur
-              "shaders/build/pc".source = ./assets/alan-wake;
+            files.game = {
+              place = {
+                # Disable motion blur
+                "shaders/build/pc".source = ./assets/alan-wake;
+              };
+              remove = [
+                # Remove startup videos
+                "data/videos/startup_mgs.bik"
+                "data/videos/startup_remedy.bik"
+              ];
             };
-            removeFiles.install = [
-              # Remove startup videos
-              "data/videos/startup_mgs.bik"
-              "data/videos/startup_remedy.bik"
-            ];
           };
-          bit-trip-runner = {
+          "BIT.TRIP RUNNER" = {
             id = 63710;
             compatTool = "proton_experimental";
           };
-          borderlands-goty = {
+          "Borderlands GOTY" = {
             id = 8980;
-            launchOptionsStr = ''WINEDLLOVERRIDES="dsound=n,b" %command% -nostartupmovies -nosplash'';
+            rawLaunchOptions = ''WINEDLLOVERRIDES="dsound=n,b" %command% -nostartupmovies -nosplash'';
           };
-          counter-strike2 = {
+          "Counter-Strike 2" = {
             id = 730;
-            launchOptionsStr = ''LD_PRELOAD="" gamemoderun gamescope -W 3440 -H 1440 -w 2560 -h 1440 -f -S stretch --force-grab-cursor --immediate-flips -r 165 --backend=wayland -O DP-1 -- env LD_PRELOAD="$LD_PRELOAD" ENABLE_LAYER_MESA_ANTI_LAG="1" %command% -sdlaudiodriver pipewire'';
+            rawLaunchOptions = ''LD_PRELOAD="" gamemoderun gamescope -W 3440 -H 1440 -w 2560 -h 1440 -f -S stretch --force-grab-cursor --immediate-flips -r 165 --backend=wayland -O DP-1 -- env LD_PRELOAD="$LD_PRELOAD" ENABLE_LAYER_MESA_ANTI_LAG="1" %command% -sdlaudiodriver pipewire'';
           };
-          fallout-76 = {
+          "Fallout 76" = {
             id = 1151340;
-            launchOptionsStr = "gamescope -w 3440 -h 1440 -f --force-grab-cursor -- %command%";
+            rawLaunchOptions = "gamescope -w 3440 -h 1440 -f --force-grab-cursor -- %command%";
           };
-          monster-hunter-world = {
+          "Monster Hunter World" = {
             id = 582010;
-            launchOptions = {
-              wrappers = [
-                # (lib.getExe pkgs.gamemode)
-                "gamemoderun"
-              ];
-            };
+            wrappers = [
+              # (lib.getExe pkgs.gamemode)
+              "gamemoderun"
+            ];
           };
-          slay-the-spire = {
+          "Slay the Spire" = {
             id = 646570;
             compatTool = "steamlinuxruntime";
-            launchOptionsStr = ''LD_PRELOAD="" gamescope -f -w 1920 -h 1080 -W 3440 -H 1440 -r 165 -- env LD_PRELOAD="$LD_PRELOAD" %command%'';
+            rawLaunchOptions = ''LD_PRELOAD="" gamescope -f -w 1920 -h 1080 -W 3440 -H 1440 -r 165 -- env LD_PRELOAD="$LD_PRELOAD" %command%'';
           };
-          super-meat-boy = {
+          "Super Meat Boy" = {
             id = 40800;
             compatTool = "Proton-GE"; # Native Linux version is selected by default but is obsolete (2010 version), thus Proton needs to be forced
-            launchOptions = {
-              args = [
-                "-fullscreen"
-                "-1920x1080"
-              ];
-            };
+            args = [
+              "-fullscreen"
+              "-1920x1080"
+            ];
           };
         };
       };
