@@ -236,6 +236,16 @@
                       }
                     ];
                   };
+                  "Nixpkgs tracker" = {
+                    name = "Nixpkgs tracker";
+                    icon = "https://nixos.org/favicon.ico";
+                    definedaliases = [ "@npr" ];
+                    urls = [
+                      {
+                        template = "https://nixpkgs-tracker.ocfox.me/?pr={searchTerms}";
+                      }
+                    ];
+                  };
                   pcgamingwiki = {
                     name = "PCGamingWiki";
                     icon = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
