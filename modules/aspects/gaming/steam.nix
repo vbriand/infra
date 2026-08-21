@@ -85,6 +85,15 @@
               ];
             };
           };
+          "Alan Wake's American Nightmare" = {
+            id = 202750;
+            files.game = {
+              remove = [
+                # Remove startup video
+                "data/videos/startup_remedy.bik"
+              ];
+            };
+          };
           "BIT.TRIP RUNNER" = {
             id = 63710;
             compatTool = "proton_experimental";
