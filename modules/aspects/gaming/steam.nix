@@ -100,7 +100,11 @@
           };
           "Borderlands GOTY" = {
             id = 8980;
-            rawLaunchOptions = ''WINEDLLOVERRIDES="dsound=n,b" %command% -nostartupmovies -nosplash'';
+            dllOverrides.dsound = "n,b";
+            args = [
+              "-nostartupmovies"
+              "-nosplash"
+            ];
           };
           "Counter-Strike 2" = {
             id = 730;
