@@ -121,6 +121,15 @@
               "gamemoderun"
             ];
           };
+          "3830" = {
+            name = "Psychonauts";
+            files.game = {
+              remove = [
+                # Remove startup video
+                "WorkResource/cutscenes/prerendered/DFLogo.bik"
+              ];
+            };
+          };
           "646570" = {
             name = "Slay the Spire";
             compatTool = "steamlinuxruntime";
