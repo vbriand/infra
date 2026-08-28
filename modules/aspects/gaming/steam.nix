@@ -58,7 +58,7 @@
       };
     };
 
-    homeManager = { config, ... }: {
+    homeManager = { config, pkgs, ... }: {
       imports = [
         inputs.steam-config-nix.homeModules.default
       ];
@@ -100,6 +100,29 @@
           };
           "8980" = {
             name = "Borderlands GOTY";
+            files = {
+              game.place = {
+                ".".source = pkgs.symlinkJoin {
+                  name = "borderlands_goty_sdk_mods";
+                  paths = [
+                    (pkgs.fetchzip {
+                      url = "https://github.com/bl-sdk/willow1-mod-manager/releases/download/v2.3/bl1-sdk.zip";
+                      hash = "sha256-zEoaFir6Wuy9H8iKbchnoksJKSW/wrbyFmxSH3DxMd8=";
+                      stripRoot = false;
+                    })
+                    (pkgs.fetchzip {
+                      url = "https://github.com/MOW531/MOW531-BL1-SDK-Mods/raw/refs/heads/main/Permanent%20FOV%20and%20sprint%20rotation%20fix/FOV%20and%20sprint%20rotation%20fix.zip";
+                      hash = "sha256-EQ8J92TJb91rAxdl2tARpo0JJSILrxLmHWo6Unw3sK0=";
+                      stripRoot = false;
+                    })
+                  ];
+                };
+                "sdk_mods/settings/FOV.json" = {
+                  source = ./assets/borderlands-goty/FOV.json;
+                  mode = "seed";
+                };
+              };
+            };
             dllOverrides.dsound = "n,b";
             args = [
               "-nostartupmovies"

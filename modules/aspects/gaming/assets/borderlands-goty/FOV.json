@@ -1,0 +1,29 @@
+{
+    "options": {
+        "World FOV": 120,
+        "World FOV Options": {
+            "Sprint FOV Modifier": 15,
+            "Eye Height Modifier": -2,
+            "Pain FOV Modifier": -1,
+            "Scale ADS FOV": true,
+            "Keep FOV while in air": true
+        },
+        "Weapon FOV Options": {
+            "Revolver FOV": 88,
+            "Repeater FOV": 88,
+            "Machine Pistol FOV": 88,
+            "Assault Shotgun FOV": 88,
+            "Combat Shotgun FOV": 88,
+            "Combat Rifle FOV": 88,
+            "Grenade Launcher FOV": 88,
+            "Rocket Launcher FOV": 88,
+            "Sniper Rifle FOV": 88,
+            "Semi-auto Sniper Rifle FOV": 88,
+            "Support Machinegun FOV": 88,
+            "SMG FOV": 88,
+            "Eridian FOV": 88
+        },
+        "Keyboard Reload Fix": true
+    },
+    "enabled": true
+}
