@@ -122,6 +122,31 @@
                   mode = "seed";
                 };
               };
+              prefix.patch = {
+                "drive_c/users/steamuser/Documents/my games/borderlands/WillowGame/Config/WillowEngine.ini" = {
+                  format = "ini";
+                  content = {
+                    "Engine.GameEngine" = {
+                      bSmoothFrameRate = "True";
+                      MinSmoothedFrameRate = 22;
+                      MaxSmoothedFrameRate = 165;
+                    };
+                    SystemSettings = {
+                      Fullscreen = "True";
+                      MaxShadowResolution = 4096;
+                      ResX = 3440;
+                      ResY = 1440;
+                    };
+                  };
+                };
+                "drive_c/users/steamuser/Documents/my games/borderlands/WillowGame/Config/WillowInput.ini" = {
+                  format = "ini";
+                  content = {
+                    "Engine.Console".ConsoleKey = "F9";
+                    "Engine.PlayerInput".bEnableMouseSmoothing = "False";
+                  };
+                };
+              };
             };
             dllOverrides.dsound = "n,b";
             args = [
