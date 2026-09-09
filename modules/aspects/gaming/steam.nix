@@ -191,6 +191,10 @@
               "-1920x1080"
             ];
           };
+          "440880" = {
+            name = "The Count Lucanor";
+            compatTool = "Proton-GE";
+          };
         };
       };
 
