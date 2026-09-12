@@ -1,4 +1,9 @@
-{ den, inputs, ... }:
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
 {
   flake-file.inputs = {
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
@@ -48,7 +53,6 @@
             };
           };
         };
-        gamescope.enable = true;
       };
 
       environment = {
@@ -156,11 +160,47 @@
           };
           "730" = {
             name = "Counter-Strike 2";
-            rawLaunchOptions = ''LD_PRELOAD="" gamemoderun gamescope -W 3440 -H 1440 -w 2560 -h 1440 -f -S stretch --force-grab-cursor --immediate-flips -r 165 --backend=wayland -O DP-1 -- env LD_PRELOAD="$LD_PRELOAD" ENABLE_LAYER_MESA_ANTI_LAG="1" %command% -sdlaudiodriver pipewire'';
+            env.ENABLE_LAYER_MESA_ANTI_LAG = "1";
+            wrappers = [
+              (lib.getExe pkgs.gamescope)
+              "-W"
+              "3440"
+              "-H"
+              "1440"
+              "-w"
+              "2560"
+              "-h"
+              "1440"
+              "-f"
+              "-S"
+              "stretch"
+              "--force-grab-cursor"
+              "--immediate-flips"
+              "--backend"
+              "wayland"
+              "-O"
+              "DP-1"
+              "--"
+              "gamemoderun"
+            ];
+            args = [
+              "-sdlaudiodriver"
+              "pipewire"
+            ];
           };
           "1151340" = {
             name = "Fallout 76";
-            rawLaunchOptions = "gamescope -w 3440 -h 1440 -f --force-grab-cursor -- %command%";
+            wrappers = [
+              (lib.getExe pkgs.gamescope)
+              "-w"
+              "3440"
+              "-h"
+              "1440"
+              "-f"
+              "--force-grab-cursor"
+              "--"
+              "gamemoderun"
+            ];
           };
           "582010" = {
             name = "Monster Hunter World";
@@ -183,7 +223,20 @@
           "646570" = {
             name = "Slay the Spire";
             compatTool = "steamlinuxruntime";
-            rawLaunchOptions = ''LD_PRELOAD="" gamescope -f -w 1920 -h 1080 -W 3440 -H 1440 -r 165 -- env LD_PRELOAD="$LD_PRELOAD" %command%'';
+            wrappers = [
+              (lib.getExe pkgs.gamescope)
+              "-W"
+              "3440"
+              "-H"
+              "1440"
+              "-w"
+              "1920"
+              "-h"
+              "1080"
+              "-f"
+              "--"
+              "gamemoderun"
+            ];
           };
           "40800" = {
             name = "Super Meat Boy";
