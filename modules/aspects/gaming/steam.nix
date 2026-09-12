@@ -199,6 +199,13 @@
             # Native version crashes on launch
             compatTool = "Proton-GE";
           };
+          "1285190" = {
+            name = "Borderlands 4";
+            wrappers = [ "gamemoderun" ];
+            args = [
+              "-nostartupmovies"
+            ];
+          };
         };
       };
 
