@@ -14,7 +14,10 @@
   };
 
   den.aspects.steam = {
-    includes = [ den.aspects.boilr ];
+    includes = [
+      den.aspects.boilr
+      den.aspects.steam.games
+    ];
 
     nixos = { pkgs, ... }: {
       nixpkgs.overlays = [ inputs.millennium.overlays.default ];
@@ -62,7 +65,7 @@
       };
     };
 
-    homeManager = { config, pkgs, ... }: {
+    homeManager = { config, ... }: {
       imports = [
         inputs.steam-config-nix.homeModules.default
       ];
@@ -71,195 +74,10 @@
       # select it in the game's options, then open ~/.local/share/Steam/config/config.vdf
       # and search for the game's id in the "CompatToolMapping" object.
       programs.steam.config = {
+        # Voir pour explorer une manière de définir les "launch options" dans apps.<id>.DefaultLaunchOption dans le fichier ~/.local/share/Steam/userdata/11938770/config/localconfig.vdf
         enable = true;
         onSteamRunning = "close";
         defaultCompatTool = "Proton-GE";
-        apps = {
-          "108710" = {
-            name = "Alan Wake";
-            files.game = {
-              place = {
-                # Disable motion blur
-                "shaders/build/pc".source = ./assets/alan-wake;
-              };
-              remove = [
-                # Remove startup videos
-                "data/videos/startup_mgs.bik"
-                "data/videos/startup_remedy.bik"
-              ];
-            };
-          };
-          "202750" = {
-            name = "Alan Wake's American Nightmare";
-            files.game = {
-              remove = [
-                # Remove startup video
-                "data/videos/startup_remedy.bik"
-              ];
-            };
-          };
-          "63710" = {
-            name = "BIT.TRIP RUNNER";
-            compatTool = "proton_experimental";
-          };
-          "8980" = {
-            name = "Borderlands GOTY";
-            files = {
-              game.place = {
-                ".".source = pkgs.symlinkJoin {
-                  name = "borderlands_goty_sdk_mods";
-                  paths = [
-                    (pkgs.fetchzip {
-                      url = "https://github.com/bl-sdk/willow1-mod-manager/releases/download/v2.3/bl1-sdk.zip";
-                      hash = "sha256-zEoaFir6Wuy9H8iKbchnoksJKSW/wrbyFmxSH3DxMd8=";
-                      stripRoot = false;
-                    })
-                    (pkgs.fetchzip {
-                      url = "https://github.com/MOW531/MOW531-BL1-SDK-Mods/raw/refs/heads/main/Permanent%20FOV%20and%20sprint%20rotation%20fix/FOV%20and%20sprint%20rotation%20fix.zip";
-                      hash = "sha256-EQ8J92TJb91rAxdl2tARpo0JJSILrxLmHWo6Unw3sK0=";
-                      stripRoot = false;
-                    })
-                  ];
-                };
-                "sdk_mods/settings/FOV.json" = {
-                  source = ./assets/borderlands-goty/FOV.json;
-                  mode = "seed";
-                };
-              };
-              prefix.patch = {
-                "drive_c/users/steamuser/Documents/my games/borderlands/WillowGame/Config/WillowEngine.ini" = {
-                  format = "ini";
-                  content = {
-                    "Engine.GameEngine" = {
-                      bSmoothFrameRate = "True";
-                      MinSmoothedFrameRate = 22;
-                      MaxSmoothedFrameRate = 165;
-                    };
-                    SystemSettings = {
-                      Fullscreen = "True";
-                      MaxShadowResolution = 4096;
-                      ResX = 3440;
-                      ResY = 1440;
-                    };
-                  };
-                };
-                "drive_c/users/steamuser/Documents/my games/borderlands/WillowGame/Config/WillowInput.ini" = {
-                  format = "ini";
-                  content = {
-                    "Engine.Console".ConsoleKey = "F9";
-                    "Engine.PlayerInput".bEnableMouseSmoothing = "False";
-                  };
-                };
-              };
-            };
-            dllOverrides.dsound = "n,b";
-            args = [
-              "-nostartupmovies"
-              "-nosplash"
-            ];
-          };
-          "730" = {
-            name = "Counter-Strike 2";
-            env.ENABLE_LAYER_MESA_ANTI_LAG = "1";
-            wrappers = [
-              (lib.getExe pkgs.gamescope)
-              "-W"
-              "3440"
-              "-H"
-              "1440"
-              "-w"
-              "2560"
-              "-h"
-              "1440"
-              "-f"
-              "-S"
-              "stretch"
-              "--force-grab-cursor"
-              "--immediate-flips"
-              "--backend"
-              "wayland"
-              "-O"
-              "DP-1"
-              "--"
-              "gamemoderun"
-            ];
-            args = [
-              "-sdlaudiodriver"
-              "pipewire"
-            ];
-          };
-          "1151340" = {
-            name = "Fallout 76";
-            wrappers = [
-              (lib.getExe pkgs.gamescope)
-              "-w"
-              "3440"
-              "-h"
-              "1440"
-              "-f"
-              "--force-grab-cursor"
-              "--"
-              "gamemoderun"
-            ];
-          };
-          "582010" = {
-            name = "Monster Hunter World";
-            wrappers = [
-              "gamemoderun"
-            ];
-          };
-          "3830" = {
-            name = "Psychonauts";
-            compatTool = "Proton-GE";
-            # https://www.pcgamingwiki.com/wiki/Psychonauts#Steam_Cloud_not_working_(Linux)
-            env.XDG_DATA_HOME = "/mnt/games/SteamLibrary/steamapps/common";
-            files.game = {
-              remove = [
-                # Remove startup video
-                "WorkResource/Cutscenes/Prerendered/DFLogo.bik"
-              ];
-            };
-          };
-          "646570" = {
-            name = "Slay the Spire";
-            compatTool = "steamlinuxruntime";
-            wrappers = [
-              (lib.getExe pkgs.gamescope)
-              "-W"
-              "3440"
-              "-H"
-              "1440"
-              "-w"
-              "1920"
-              "-h"
-              "1080"
-              "-f"
-              "--"
-              "gamemoderun"
-            ];
-          };
-          "40800" = {
-            name = "Super Meat Boy";
-            # Native Linux version is selected by default but is obsolete (2010 version), thus Proton needs to be forced
-            compatTool = "Proton-GE";
-            args = [
-              "-fullscreen"
-              "-1920x1080"
-            ];
-          };
-          "440880" = {
-            name = "The Count Lucanor";
-            # Native version crashes on launch
-            compatTool = "Proton-GE";
-          };
-          "1285190" = {
-            name = "Borderlands 4";
-            wrappers = [ "gamemoderun" ];
-            args = [
-              "-nostartupmovies"
-            ];
-          };
-        };
       };
 
       sops.templates."steam-easygrid/config.json" = {
