@@ -165,7 +165,6 @@
           "582010" = {
             name = "Monster Hunter World";
             wrappers = [
-              # (lib.getExe pkgs.gamemode)
               "gamemoderun"
             ];
           };
@@ -188,7 +187,8 @@
           };
           "40800" = {
             name = "Super Meat Boy";
-            compatTool = "Proton-GE"; # Native Linux version is selected by default but is obsolete (2010 version), thus Proton needs to be forced
+            # Native Linux version is selected by default but is obsolete (2010 version), thus Proton needs to be forced
+            compatTool = "Proton-GE";
             args = [
               "-fullscreen"
               "-1920x1080"
@@ -196,6 +196,7 @@
           };
           "440880" = {
             name = "The Count Lucanor";
+            # Native version crashes on launch
             compatTool = "Proton-GE";
           };
         };
