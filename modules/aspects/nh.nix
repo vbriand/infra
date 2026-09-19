@@ -16,7 +16,7 @@
       {
         programs.nh = {
           enable = true;
-          flake = "/home/${home.name}/Projects/infra";
+          flake = "/home/${home.userName}/Projects/infra";
         };
       };
   };

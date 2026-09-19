@@ -54,14 +54,14 @@ in
 
         sops =
           let
-            homeDirectory = "/home/${home.name}";
+            homeDirectory = "/home/${home.userName}";
           in
           {
             age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
             defaultSopsFile = "${secretsPath}/secrets.yaml";
             validateSopsFiles = false;
             secrets = {
-              "keys/ssh/${home.name}" = {
+              "keys/ssh/${home.userName}" = {
                 path = "${homeDirectory}/.ssh/id_ed25519";
               };
               "keys/syncthing/hogwarts" = {
