@@ -21,6 +21,10 @@
     };
     import-tree.url = "github:vic/import-tree";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
+    mods = {
+      url = "path:/home/valou/Projects/mods";
+      flake = false;
+    };
     nix-secrets = {
       url = "git+ssh://git@github.com/vbriand/nix-secrets?ref=master&shallow=1";
       flake = false;
