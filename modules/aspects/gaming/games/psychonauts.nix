@@ -1,5 +1,12 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 {
+  flake-file.inputs = {
+    mods = {
+      url = "path:/mnt/games/mods";
+      flake = false;
+    };
+  };
+
   den.aspects.steam.games.homeManager = { pkgs, ... }: {
     programs.steam.config.apps."3830" = {
       name = "Psychonauts";
@@ -28,6 +35,21 @@
               fi
               7z x "$renamed" -o"$out" -y
               chmod 755 "$out"
+            '';
+          };
+          "ModResource".source = pkgs.stdenv.mkDerivation {
+            pname = "shibanauts-hd-mod";
+            version = "2026-09-10";
+
+            # https://www.nexusmods.com/psychonauts/mods/21
+            src = inputs.mods + "/psychonauts/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z";
+
+            nativeBuildInputs = [ pkgs.p7zip ];
+
+            unpackPhase = ''
+              runHook preUnpack
+              7z x "$src" -o"$out" -y
+              runHook postUnpack
             '';
           };
           "AudioSettings.ini".text = ''
