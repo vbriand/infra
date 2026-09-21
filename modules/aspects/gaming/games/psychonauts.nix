@@ -46,6 +46,9 @@
 
             nativeBuildInputs = [ pkgs.p7zip ];
 
+            dontBuild = true;
+            dontFixup = true;
+
             unpackPhase = ''
               runHook preUnpack
               7z x "$src" -o"$out" -y
@@ -77,7 +80,158 @@
             Shadows=true
             GammaCorrection=1.000000
           '';
-        };
+        }
+        // (
+          let
+            defaultCutscenesPaths = [
+              "WorkResource/Cutscenes/Prerendered/ASAH.bik"
+              "WorkResource/Cutscenes/Prerendered/ASCA.bik"
+              "WorkResource/Cutscenes/Prerendered/ASCD.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEB_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEB_win.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEE_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEE_win.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEF_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEF_win.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEG_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/ASEG_win.bik"
+              "WorkResource/Cutscenes/Prerendered/ASET.bik"
+              "WorkResource/Cutscenes/Prerendered/ASIB.bik"
+              "WorkResource/Cutscenes/Prerendered/asie.bik"
+              "WorkResource/Cutscenes/Prerendered/ASIF.bik"
+              "WorkResource/Cutscenes/Prerendered/ASIG.bik"
+              "WorkResource/Cutscenes/Prerendered/ASIN.bik"
+              "WorkResource/Cutscenes/Prerendered/ASLS.bik"
+              "WorkResource/Cutscenes/Prerendered/ASLV.bik"
+              "WorkResource/Cutscenes/Prerendered/ASSH.bik"
+              "WorkResource/Cutscenes/Prerendered/ASSP.bik"
+              "WorkResource/Cutscenes/Prerendered/ASWV.bik"
+              "WorkResource/Cutscenes/Prerendered/BBLI.bik"
+              "WorkResource/Cutscenes/Prerendered/BullTossRaz_Rt.bik"
+              "WorkResource/Cutscenes/Prerendered/BVDO.bik"
+              "WorkResource/Cutscenes/Prerendered/bvin.bik"
+              "WorkResource/Cutscenes/Prerendered/BVOT.bik"
+              "WorkResource/Cutscenes/Prerendered/BVVI.bik"
+              "WorkResource/Cutscenes/Prerendered/CABD.bik"
+              "WorkResource/Cutscenes/Prerendered/CABV.bik"
+              "WorkResource/Cutscenes/Prerendered/CAEC_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/CAEC_win.bik"
+              "WorkResource/Cutscenes/Prerendered/CAEM_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/CAEM_win.bik"
+              "WorkResource/Cutscenes/Prerendered/CAIM.bik"
+              "WorkResource/Cutscenes/Prerendered/CAIO_2.bik"
+              "WorkResource/Cutscenes/Prerendered/CAIO.bik"
+              "WorkResource/Cutscenes/Prerendered/CALD.bik"
+              "WorkResource/Cutscenes/Prerendered/CALK.bik"
+              "WorkResource/Cutscenes/Prerendered/CALP.bik"
+              "WorkResource/Cutscenes/Prerendered/CALU.bik"
+              "WorkResource/Cutscenes/Prerendered/CANI.bik"
+              "WorkResource/Cutscenes/Prerendered/CASR.bik"
+              "WorkResource/Cutscenes/Prerendered/ClairVis_Archway.bik"
+              "WorkResource/Cutscenes/Prerendered/ClairVis_Guitar.bik"
+              "WorkResource/Cutscenes/Prerendered/ClairVis_Rose.bik"
+              "WorkResource/Cutscenes/Prerendered/ClairVis_TikiHut.bik"
+              "WorkResource/Cutscenes/Prerendered/ClairVis_Vine.bik"
+              "WorkResource/Cutscenes/Prerendered/clairvoyancemeritbadge.bik"
+              "WorkResource/Cutscenes/Prerendered/confusionmeritbadge.bik"
+              "WorkResource/Cutscenes/Prerendered/DFLogo.bik"
+              "WorkResource/Cutscenes/Prerendered/Dracogen.bik"
+              "WorkResource/Cutscenes/Prerendered/FINI.bik"
+              "WorkResource/Cutscenes/Prerendered/FirestartingMeritBadge.bik"
+              "WorkResource/Cutscenes/Prerendered/Gameplay.bik"
+              "WorkResource/Cutscenes/Prerendered/INTRO.bik"
+              "WorkResource/Cutscenes/Prerendered/InvisibilityMeritBadge.bik"
+              "WorkResource/Cutscenes/Prerendered/LevitationMeritBadge.bik"
+              "WorkResource/Cutscenes/Prerendered/LLBF.bik"
+              "WorkResource/Cutscenes/Prerendered/LLBT.bik"
+              "WorkResource/Cutscenes/Prerendered/LLEL_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/LLEL_win.bik"
+              "WorkResource/Cutscenes/Prerendered/LLIL.bik"
+              "WorkResource/Cutscenes/Prerendered/LLLV.bik"
+              "WorkResource/Cutscenes/Prerendered/lo_breakingnews.bik"
+              "WorkResource/Cutscenes/Prerendered/LOIN.bik"
+              "WorkResource/Cutscenes/Prerendered/louc.bik"
+              "WorkResource/Cutscenes/Prerendered/LOVE.bik"
+              "WorkResource/Cutscenes/Prerendered/LOZ1.bik"
+              "WorkResource/Cutscenes/Prerendered/LOZ2.bik"
+              "WorkResource/Cutscenes/Prerendered/MajescoLogo.bik"
+              "WorkResource/Cutscenes/Prerendered/marksmanshipbadge.bik"
+              "WorkResource/Cutscenes/Prerendered/MCBI.bik"
+              "WorkResource/Cutscenes/Prerendered/MCFU.bik"
+              "WorkResource/Cutscenes/Prerendered/MCVI.bik"
+              "WorkResource/Cutscenes/Prerendered/MMDD.bik"
+              "WorkResource/Cutscenes/Prerendered/MMDF.bik"
+              "WorkResource/Cutscenes/Prerendered/MMDM.bik"
+              "WorkResource/Cutscenes/Prerendered/NIBL.bik"
+              "WorkResource/Cutscenes/Prerendered/NICE.bik"
+              "WorkResource/Cutscenes/Prerendered/NID1.bik"
+              "WorkResource/Cutscenes/Prerendered/NID2.bik"
+              "WorkResource/Cutscenes/Prerendered/nien.bik"
+              "WorkResource/Cutscenes/Prerendered/NIIN.bik"
+              "WorkResource/Cutscenes/Prerendered/nivi.bik"
+              "WorkResource/Cutscenes/Prerendered/RazOnBull.bik"
+              "WorkResource/Cutscenes/Prerendered/saco.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Caulder2Shoe.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Crib2Caulder.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face1.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face1_implosion.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face2.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face2_implosion.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face3.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face3_implosion.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face6.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Face6_implosion.bik"
+              "WorkResource/Cutscenes/Prerendered/SACU_Shoe2Factory.bik"
+              "WorkResource/Cutscenes/Prerendered/SAES_lose.bik"
+              "WorkResource/Cutscenes/Prerendered/SAES_win.bik"
+              "WorkResource/Cutscenes/Prerendered/SAIN_1.bik"
+              "WorkResource/Cutscenes/Prerendered/SAIN_2.bik"
+              "WorkResource/Cutscenes/Prerendered/SAIS.bik"
+              "WorkResource/Cutscenes/Prerendered/SAMC.bik"
+              "WorkResource/Cutscenes/Prerendered/SLAC.bik"
+              "WorkResource/Cutscenes/Prerendered/SLBT.bik"
+              "WorkResource/Cutscenes/Prerendered/SLIN_1.bik"
+              "WorkResource/Cutscenes/Prerendered/slin3.bik"
+              "WorkResource/Cutscenes/Prerendered/TelekinesisMeritBadge.bik"
+              "WorkResource/Cutscenes/Prerendered/THBF.bik"
+              "WorkResource/Cutscenes/Prerendered/THBI.bik"
+              "WorkResource/Cutscenes/Prerendered/THFP.bik"
+              "WorkResource/Cutscenes/Prerendered/transgaming.bik"
+            ];
+
+            hdCutscenesPaths = pkgs.stdenv.mkDerivation {
+              pname = "shibanauts-hd-cutscenes";
+              version = "2026-06-23";
+
+              src = inputs.mods + "/psychonauts/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z";
+
+              nativeBuildInputs = [ pkgs.p7zip ];
+
+              dontBuild = true;
+              dontFixup = true;
+
+              unpackPhase = ''
+                runHook preUnpack
+                7z x "$src" -y
+                runHook postUnpack
+              '';
+
+              installPhase = ''
+                runHook preInstall
+                mkdir -p "$out/Cutscenes/Prerendered"
+                for f in Cutscenes/Prerendered/*.bik; do
+                  mv "$f" "$out/Cutscenes/Prerendered/$(basename "$f" | tr '[:upper:]' '[:lower:]')"
+                done
+                runHook postInstall
+              '';
+            };
+          in
+          lib.genAttrs (lib.remove "WorkResource/Cutscenes/Prerendered/DFLogo.bik" defaultCutscenesPaths)
+            (path: {
+              source = hdCutscenesPaths + "/Cutscenes/Prerendered/${lib.toLower (baseNameOf path)}";
+            })
+        );
+
         remove = [
           # Remove startup video
           "WorkResource/Cutscenes/Prerendered/DFLogo.bik"
