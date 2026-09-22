@@ -1,4 +1,4 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
@@ -19,10 +19,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-tree.url = "github:vic/import-tree";
+    import-tree.url = "github:denful/import-tree";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
     mods = {
-      url = "path:/home/valou/Projects/mods";
+      url = "path:/mnt/games/mods";
       flake = false;
     };
     nix-secrets = {
@@ -30,7 +30,7 @@
       flake = false;
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {
