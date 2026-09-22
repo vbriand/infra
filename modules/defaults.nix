@@ -41,13 +41,13 @@
   den.default.nixos.networking.networkmanager.enable = true;
   den.default.nixos.time.timeZone = "Europe/Paris";
 
-  den.default.nixos.i18n.defaultLocale = "en_US.UTF-8";
+  den.default.nixos.i18n.defaultLocale = "en_GB.UTF-8";
   den.default.nixos.i18n.extraLocaleSettings = {
     LC_CTYPE = "fr_FR.UTF-8";
     LC_ADDRESS = "fr_FR.UTF-8";
     LC_IDENTIFICATION = "fr_FR.UTF-8";
     LC_MEASUREMENT = "fr_FR.UTF-8";
-    LC_MESSAGES = "en_US.UTF-8";
+    LC_MESSAGES = "en_GB.UTF-8";
     LC_MONETARY = "fr_FR.UTF-8";
     LC_NAME = "fr_FR.UTF-8";
     LC_NUMERIC = "fr_FR.UTF-8";
