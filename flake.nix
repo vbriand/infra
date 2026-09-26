@@ -4,6 +4,14 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    alan-wake-mods = {
+      url = "path:/mnt/games/mods/alan-wake";
+      flake = false;
+    };
+    alan-wakes-american-nightmare-mods = {
+      url = "path:/mnt/games/mods/alan-wakes-american-nightmare";
+      flake = false;
+    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     den.url = "github:denful/den";
     disko = {
@@ -21,10 +29,6 @@
     };
     import-tree.url = "github:denful/import-tree";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
-    mods = {
-      url = "path:/mnt/games/mods";
-      flake = false;
-    };
     nix-secrets = {
       url = "git+ssh://git@github.com/vbriand/nix-secrets?ref=master&shallow=1";
       flake = false;
@@ -37,6 +41,10 @@
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
+    };
+    psychonauts-mods = {
+      url = "path:/mnt/games/mods/psychonauts";
+      flake = false;
     };
     sops-nix = {
       url = "github:mic92/sops-nix";
