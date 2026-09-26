@@ -1,8 +1,8 @@
 { inputs, lib, ... }:
 {
   flake-file.inputs = {
-    mods = {
-      url = "path:/mnt/games/mods";
+    psychonauts-mods = {
+      url = "path:/mnt/games/mods/psychonauts";
       flake = false;
     };
   };
@@ -40,9 +40,12 @@
           "ModResource".source = pkgs.stdenv.mkDerivation {
             pname = "shibanauts-hd-mod";
             version = "2026-09-10";
+            outputHash = "sha256-TqXOVHrkKpDuCOx3LhUWJ31+nE1uQSvdELovv3AIbI8=";
+            outputHashAlgo = "sha256";
+            outputHashMode = "nar";
 
             # https://www.nexusmods.com/psychonauts/mods/21
-            src = inputs.mods + "/psychonauts/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z";
+            src = inputs.psychonauts-mods + "/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z";
 
             nativeBuildInputs = [ pkgs.p7zip ];
 
@@ -202,8 +205,11 @@
             hdCutscenesPaths = pkgs.stdenv.mkDerivation {
               pname = "shibanauts-hd-cutscenes";
               version = "2026-06-23";
+              outputHash = "sha256-2fRhCZ1pynY5jeOqGZhZzaAti+Y6IaVB8giCIiFnG0w=";
+              outputHashAlgo = "sha256";
+              outputHashMode = "nar";
 
-              src = inputs.mods + "/psychonauts/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z";
+              src = inputs.psychonauts-mods + "/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z";
 
               nativeBuildInputs = [ pkgs.p7zip ];
 
