@@ -5,7 +5,7 @@
         enable = true;
         clean = {
           enable = true;
-          extraArgs = "--keep 15 --optimize";
+          extraArgs = "--keep 15 --optimise";
           dates = "Sun, 22:00";
         };
       };
