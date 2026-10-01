@@ -1,13 +1,34 @@
-{ inputs, lib, ... }:
+{ lib, ... }:
+let
+  modsDir = "/mnt/games/mods/psychonauts";
+in
 {
-  flake-file.inputs = {
-    psychonauts-mods = {
-      url = "path:/mnt/games/mods/psychonauts";
-      flake = false;
-    };
-  };
+  den.aspects.steam.games.homeManager = { config, pkgs, ... }: {
+    # https://www.nexusmods.com/psychonauts/mods/21
+    home.activation.extractPsychonautsShibanautsHdMod = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      extracted="${modsDir}/extracted/shibanauts-hd-mod"
+      if [ ! -f "$extracted/.done" ]; then
+        zipfile="${modsDir}/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z"
+        $DRY_RUN_CMD mkdir -p "$extracted"
+        $DRY_RUN_CMD ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
+        $DRY_RUN_CMD touch "$extracted/.done"
+      fi
+    '';
 
-  den.aspects.steam.games.homeManager = { pkgs, ... }: {
+    # https://www.nexusmods.com/psychonauts/mods/21
+    home.activation.extractPsychonautsHdCutscenes = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      extracted="${modsDir}/extracted/hd-cutscenes"
+      if [ ! -f "$extracted/.done" ]; then
+        zipfile="${modsDir}/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z"
+        $DRY_RUN_CMD mkdir -p "$extracted"
+        $DRY_RUN_CMD ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
+        for f in "$extracted/Cutscenes/Prerendered/"*.bik; do
+          $DRY_RUN_CMD mv "$f" "$(dirname $f)/$(basename "$f" | tr '[:upper:]' '[:lower:]')"
+        done
+        $DRY_RUN_CMD touch "$extracted/.done"
+      fi
+    '';
+
     programs.steam.config.apps."3830" = {
       name = "Psychonauts";
       compatTool = "Proton-GE";
@@ -37,27 +58,7 @@
               chmod 755 "$out"
             '';
           };
-          "ModResource".source = pkgs.stdenv.mkDerivation {
-            pname = "shibanauts-hd-mod";
-            version = "2026-09-10";
-            outputHash = "sha256-TqXOVHrkKpDuCOx3LhUWJ31+nE1uQSvdELovv3AIbI8=";
-            outputHashAlgo = "sha256";
-            outputHashMode = "nar";
-
-            # https://www.nexusmods.com/psychonauts/mods/21
-            src = inputs.psychonauts-mods + "/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z";
-
-            nativeBuildInputs = [ pkgs.p7zip ];
-
-            dontBuild = true;
-            dontFixup = true;
-
-            unpackPhase = ''
-              runHook preUnpack
-              7z x "$src" -o"$out" -y
-              runHook postUnpack
-            '';
-          };
+          "ModResource".source = config.lib.file.mkOutOfStoreSymlink "${modsDir}/extracted/shibanauts-hd-mod";
           "AudioSettings.ini".text = ''
             [AudioSettings]
             MasterVolume=1.000000
@@ -202,39 +203,10 @@
               "WorkResource/Cutscenes/Prerendered/transgaming.bik"
             ];
 
-            hdCutscenesPaths = pkgs.stdenv.mkDerivation {
-              pname = "shibanauts-hd-cutscenes";
-              version = "2026-06-23";
-              outputHash = "sha256-2fRhCZ1pynY5jeOqGZhZzaAti+Y6IaVB8giCIiFnG0w=";
-              outputHashAlgo = "sha256";
-              outputHashMode = "nar";
-
-              src = inputs.psychonauts-mods + "/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z";
-
-              nativeBuildInputs = [ pkgs.p7zip ];
-
-              dontBuild = true;
-              dontFixup = true;
-
-              unpackPhase = ''
-                runHook preUnpack
-                7z x "$src" -y
-                runHook postUnpack
-              '';
-
-              installPhase = ''
-                runHook preInstall
-                mkdir -p "$out/Cutscenes/Prerendered"
-                for f in Cutscenes/Prerendered/*.bik; do
-                  mv "$f" "$out/Cutscenes/Prerendered/$(basename "$f" | tr '[:upper:]' '[:lower:]')"
-                done
-                runHook postInstall
-              '';
-            };
           in
           lib.genAttrs (lib.remove "WorkResource/Cutscenes/Prerendered/DFLogo.bik" defaultCutscenesPaths)
             (path: {
-              source = hdCutscenesPaths + "/Cutscenes/Prerendered/${lib.toLower (baseNameOf path)}";
+              source = config.lib.file.mkOutOfStoreSymlink "${modsDir}/extracted/hd-cutscenes/Cutscenes/Prerendered/${lib.toLower (baseNameOf path)}";
             })
         );
 
