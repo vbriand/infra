@@ -6,6 +6,7 @@
   ];
 
   flake-file.inputs = {
+    dag.url = "github:denful/dag";
     den.url = "github:denful/den";
     flake-file.url = "github:denful/flake-file";
     home-manager = {
@@ -13,4 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  _module.args.dag = inputs.dag.lib { lib = inputs.nixpkgs.lib; };
 }
