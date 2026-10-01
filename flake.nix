@@ -4,15 +4,8 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    alan-wake-mods = {
-      url = "path:/mnt/games/mods/alan-wake";
-      flake = false;
-    };
-    alan-wakes-american-nightmare-mods = {
-      url = "path:/mnt/games/mods/alan-wakes-american-nightmare";
-      flake = false;
-    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    dag.url = "github:denful/dag";
     den.url = "github:denful/den";
     disko = {
       url = "github:nix-community/disko/latest";
@@ -41,10 +34,6 @@
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-    };
-    psychonauts-mods = {
-      url = "path:/mnt/games/mods/psychonauts";
-      flake = false;
     };
     sops-nix = {
       url = "github:mic92/sops-nix";
