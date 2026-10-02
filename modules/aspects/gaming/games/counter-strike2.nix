@@ -30,6 +30,7 @@
         "-sdlaudiodriver"
         "pipewire"
       ];
+      allowDownloadsWhileRunning = "never";
     };
   };
 }
