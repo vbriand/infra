@@ -9,9 +9,9 @@ in
       extracted="${modsDir}/extracted/shibanauts-hd-mod"
       if [ ! -f "$extracted/.done" ]; then
         zipfile="${modsDir}/Shibanauts HD Mod 21 6 2026-09-10T06-56Z tCH1DH9zc.7z"
-        $DRY_RUN_CMD mkdir -p "$extracted"
-        $DRY_RUN_CMD ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
-        $DRY_RUN_CMD touch "$extracted/.done"
+        run mkdir -p "$extracted"
+        run ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
+        run touch "$extracted/.done"
       fi
     '';
 
@@ -20,12 +20,12 @@ in
       extracted="${modsDir}/extracted/hd-cutscenes"
       if [ ! -f "$extracted/.done" ]; then
         zipfile="${modsDir}/HD CUTSCENES - Optional 21 3 2026-06-23T23-32Z 86YpqYr0n.7z"
-        $DRY_RUN_CMD mkdir -p "$extracted"
-        $DRY_RUN_CMD ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
+        run mkdir -p "$extracted"
+        run ${lib.getExe pkgs.p7zip} x "$zipfile" -o"$extracted" -y
         for f in "$extracted/Cutscenes/Prerendered/"*.bik; do
-          $DRY_RUN_CMD mv "$f" "$(dirname $f)/$(basename "$f" | tr '[:upper:]' '[:lower:]')"
+          run mv "$f" "$(dirname $f)/$(basename "$f" | tr '[:upper:]' '[:lower:]')"
         done
-        $DRY_RUN_CMD touch "$extracted/.done"
+        run touch "$extracted/.done"
       fi
     '';
 
