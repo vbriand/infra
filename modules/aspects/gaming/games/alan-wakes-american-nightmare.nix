@@ -11,9 +11,9 @@ in
           extracted="${modsDir}/extracted/upscaled-cinematics"
           if [ ! -f "$extracted/.done" ]; then
             zipfile="${modsDir}/Upscaled Cinematics (HEAVY Version)-6-1-00-1738783601.zip"
-            $DRY_RUN_CMD mkdir -p "$extracted"
-            $DRY_RUN_CMD ${lib.getExe pkgs.unzip} -q -o "$zipfile" -d "$extracted"
-            $DRY_RUN_CMD touch "$extracted/.done"
+            run mkdir -p "$extracted"
+            run ${lib.getExe pkgs.unzip} -q -o "$zipfile" -d "$extracted"
+            run touch "$extracted/.done"
           fi
         '';
 
