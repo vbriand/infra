@@ -27,7 +27,7 @@
       flake = false;
     };
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {
