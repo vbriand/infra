@@ -239,7 +239,7 @@
                   "Nixpkgs tracker" = {
                     name = "Nixpkgs tracker";
                     icon = "https://nixos.org/favicon.ico";
-                    definedaliases = [ "@npr" ];
+                    definedAliases = [ "@npr" ];
                     urls = [
                       {
                         template = "https://nixpkgs-tracker.ocfox.me/?pr={searchTerms}";
