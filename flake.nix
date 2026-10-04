@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:denful/import-tree";
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     nix-secrets = {
       url = "git+ssh://git@github.com/vbriand/nix-secrets?ref=master&shallow=1";
       flake = false;

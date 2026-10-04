@@ -6,7 +6,7 @@
 }:
 {
   flake-file.inputs = {
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix&ref=next";
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     steam-config-nix = {
       url = "github:different-name/steam-config-nix";
       inputs.nixpkgs.follows = "nixpkgs";
