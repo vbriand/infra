@@ -4,17 +4,17 @@
   den.aspects.hogwarts = {
     includes = with den.aspects; [
       bootable
-      emacs
-      fish
+      applications.development.editors.emacs
+      applications.shells.fish
       flatpak
-      gaming.communication
-      ghostty
-      gpg
+      applications.gaming.communication
+      applications.terminals.ghostty
+      applications.security.gpg
       nh
       plasma
       secrets
-      ssh
-      syncthing
+      applications.networking.ssh
+      applications.networking.syncthing
     ];
 
     # host NixOS configuration

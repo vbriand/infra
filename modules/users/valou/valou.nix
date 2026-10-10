@@ -9,14 +9,14 @@
     includes = [
       den.batteries.define-user
       den.batteries.primary-user
-      den.aspects.fish
-      den.aspects.gaming
-      den.aspects.ghostty
+      den.aspects.applications.shells.fish
+      den.aspects.applications.gaming
+      den.aspects.applications.terminals.ghostty
       den.aspects.nh
-      den.aspects.kodi
+      den.aspects.applications.media.kodi
       den.aspects.secrets
-      den.aspects.syncthing
-      den.aspects.zen-browser
+      den.aspects.applications.networking.syncthing
+      den.aspects.applications.browsers.zen-browser
     ];
 
     user =
@@ -58,10 +58,10 @@
         };
       };
       includes = with den.aspects; [
-        audio.effects
+        hardware.audio.effects
         dev-tools.valou
-        ludusavi.daily-backup
-        plasma
+        applications.gaming.ludusavi.daily-backup
+        desktops.plasma
       ];
     };
 
