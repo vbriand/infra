@@ -4,16 +4,18 @@
     includes = lib.attrValues den.aspects.dev-tools.valou.provides;
 
     provides.editors = {
-      includes = [
-        den.aspects.emacs
-        den.aspects.vscode.personal
+      includes = with den.aspects.applications.development.editors; [
+        emacs
+        vscode.personal
       ];
     };
 
     provides.tools = {
-      includes = [
-        (den.aspects.better-commits { dotfile = ../../assets/better-commits.json; })
-        den.aspects.git.valou.personal
+      includes = with den.aspects.applications.development.vcs; [
+        (better-commits {
+          dotfile = ../../assets/better-commits.json;
+        })
+        git.valou.personal
       ];
     };
   };
