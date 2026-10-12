@@ -26,7 +26,6 @@
         environment = {
           plasma6.excludePackages = with pkgs.kdePackages; [
             plasma-browser-integration
-            kdepim-runtime
             konsole
           ];
           systemPackages = with pkgs.kdePackages; [
@@ -40,6 +39,7 @@
         };
 
         programs.kdeconnect.enable = true;
+        programs.kde-pim.enable = false;
       };
 
     homeManager = { osConfig, pkgs, ... }: {
