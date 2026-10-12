@@ -1,6 +1,5 @@
 { den, inputs, ... }:
 {
-  # host aspect
   den.aspects.hogwarts = {
     includes = with den.aspects; [
       bootable
@@ -14,9 +13,9 @@
       secrets
       applications.networking.ssh
       applications.networking.syncthing
+      hardware.monitor
     ];
 
-    # host NixOS configuration
     nixos =
       {
         config,
@@ -34,7 +33,6 @@
         ];
 
         hardware.xone.enable = true;
-        hardware.i2c.enable = true; # Allow changing the monitor's brightness
 
         environment = {
           systemPackages = with pkgs; [

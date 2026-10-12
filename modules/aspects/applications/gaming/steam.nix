@@ -13,7 +13,7 @@
     };
   };
 
-  den.aspects.applications.gaming.steam = {
+  den.aspects.applications.gaming.steam = { user, ... }: {
     includes = [
       den.aspects.applications.gaming.boilr
       den.aspects.applications.games
@@ -57,6 +57,8 @@
           };
         };
       };
+
+      users.users.${user.userName}.extraGroups = [ "gamemode" ];
 
       environment = {
         systemPackages = with pkgs; [

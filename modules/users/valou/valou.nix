@@ -23,10 +23,6 @@
       { config, ... }:
       {
         hashedPasswordFile = config.sops.secrets."passwords/valou".path;
-        extraGroups = [
-          "gamemode" # TODO: find how to make it dependent on programs.gamemode.enable
-          "i2c" # Same for hardware.i2c.enable
-        ];
       };
 
     homeManager =
