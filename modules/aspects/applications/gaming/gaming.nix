@@ -24,7 +24,7 @@
       };
     };
 
-    provides.communication = {
+    communication = {
       nixos = { pkgs, ... }: {
         environment = {
           systemPackages = with pkgs; [

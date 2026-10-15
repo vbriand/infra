@@ -11,7 +11,7 @@
       security.rtkit.enable = true;
     };
 
-    provides.effects = {
+    effects = {
       homeManager = {
         services.easyeffects.enable = true;
       };

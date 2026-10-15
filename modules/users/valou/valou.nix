@@ -55,7 +55,7 @@
       };
       includes = with den.aspects; [
         hardware.audio.effects
-        dev-tools.valou
+        dev-tools.valou._
         applications.gaming.ludusavi.daily-backup
         desktops.plasma
       ];
