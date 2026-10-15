@@ -4,7 +4,7 @@
     editors = {
       includes = with den.aspects.applications.development.editors; [
         emacs
-        vscode.personal
+        vscode
       ];
     };
 
@@ -13,7 +13,7 @@
         (better-commits {
           dotfile = ../../assets/better-commits.json;
         })
-        git.valou.personal
+        git
       ];
     };
   };
