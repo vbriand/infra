@@ -79,6 +79,12 @@
             widgets = [ "org.kde.plasma.icontasks" ];
           }
         ];
+        configFile."kwinrc".Wayland = {
+          "InputMethod" = {
+            shellExpand = true;
+            value = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
+          };
+        };
       };
 
       xdg.configFile."kdeconnect/config".text = ''
