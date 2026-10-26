@@ -220,7 +220,15 @@ in
             (path: {
               source = config.lib.file.mkOutOfStoreSymlink "${modsDir}/extracted/hd-cutscenes/Cutscenes/Prerendered/${lib.toLower (baseNameOf path)}";
             })
-        );
+        )
+        // (lib.genAttrs' [ 1 2 3 ] (
+          profileNb:
+          lib.attrsets.nameValuePair
+            ("profiles/profile ${toString profileNb}/Profile ${toString profileNb}- Raz.ini")
+            ({
+              source = ./assets/Profile.ini;
+            })
+        ));
 
         remove = [
           # Remove startup video
