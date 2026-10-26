@@ -36,27 +36,39 @@ in
       env.XDG_DATA_HOME = "/mnt/games/SteamLibrary/steamapps/common";
       files.game = {
         place = {
-          ".".source = pkgs.fetchurl {
-            url = "https://gitlab.com/-/project/34250039/uploads/6f9bb111143e042a49c23e0f79bb38df/Astralathe-master-24fbe2d7.zip";
-            hash = "sha256-QVgkO2lSzIKvIqD8zQ9hs4Cu/PlgCKkSxXElbkPhzsc=";
-            recursiveHash = true;
-            downloadToTemp = true;
-            nativeBuildInputs = [ pkgs.p7zip ];
+          ".".source = pkgs.symlinkJoin {
+            name = "psychonauts_mods";
+            paths = [
+              (pkgs.fetchurl {
+                # https://gitlab.com/scrunguscrungus/astralathe
+                url = "https://gitlab.com/-/project/34250039/uploads/6f9bb111143e042a49c23e0f79bb38df/Astralathe-master-24fbe2d7.zip";
+                hash = "sha256-QVgkO2lSzIKvIqD8zQ9hs4Cu/PlgCKkSxXElbkPhzsc=";
+                recursiveHash = true;
+                downloadToTemp = true;
+                nativeBuildInputs = [ pkgs.p7zip ];
 
-            # The zip contains out-of-spec Windows backslashes for paths that fetchzip can't
-            # process, so we need to replace them with proper forward slashes before extracting it
-            postFetch = ''
-              # "7z rn" doesn't work if the zip file doesn't have an extension, so we need to add
-              # one as downloadToTemp = true; names $downloadedFile as "$TMPDIR/file"
-              renamed="$TMPDIR/$downloadedFile.zip"
-              mv "$downloadedFile" "$renamed"
-              pairs=$(7z l "$renamed" | awk '{ n=$6 } n ~ /\\/ && n !~ /\\$/ { print n, gensub(/\\/,"/","g",n) }' | paste -s)
-              if [ -n "$pairs" ]; then
-                  7z rn "$renamed" $pairs
-              fi
-              7z x "$renamed" -o"$out" -y
-              chmod 755 "$out"
-            '';
+                # The zip contains out-of-spec Windows backslashes for paths that fetchzip can't
+                # process, so we need to replace them with proper forward slashes before extracting it
+                postFetch = ''
+                  # "7z rn" doesn't work if the zip file doesn't have an extension, so we need to add
+                  # one as downloadToTemp = true; names $downloadedFile as "$TMPDIR/file"
+                  renamed="$TMPDIR/$downloadedFile.zip"
+                  mv "$downloadedFile" "$renamed"
+                  pairs=$(7z l "$renamed" | awk '{ n=$6 } n ~ /\\/ && n !~ /\\$/ { print n, gensub(/\\/,"/","g",n) }' | paste -s)
+                  if [ -n "$pairs" ]; then
+                      7z rn "$renamed" $pairs
+                  fi
+                  7z x "$renamed" -o"$out" -y
+                  chmod 755 "$out"
+                '';
+              })
+              (pkgs.fetchzip {
+                # https://github.com/jdaniellee/psycho_fix
+                url = "https://github.com/user-attachments/files/30168036/psycho_fix.zip";
+                hash = "sha256-il+xr1HjmpNhP8vF/5vIpHy15nXle4Eb59mQdMJhttw=";
+                stripRoot = false;
+              })
+            ];
           };
           "ModResource".source = config.lib.file.mkOutOfStoreSymlink "${modsDir}/extracted/shibanauts-hd-mod";
           "AudioSettings.ini".text = ''
@@ -217,6 +229,8 @@ in
       };
       # Needed for Astralathe
       dllOverrides.dsound = "n,b";
+      # Needed for psycho fix
+      dllOverrides.dinput8 = "n,b";
       wrappers = [
         (lib.getExe pkgs.gamescope)
         "-W"
