@@ -31,7 +31,7 @@ in
 
     programs.steam.config.apps."3830" = {
       name = "Psychonauts";
-      compatTool = "Proton-GE";
+      compatTool = "proton_11";
       # https://www.pcgamingwiki.com/wiki/Psychonauts#Steam_Cloud_not_working_(Linux)
       env.XDG_DATA_HOME = "/mnt/games/SteamLibrary/steamapps/common";
       files.game = {
